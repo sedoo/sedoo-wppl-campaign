@@ -1,0 +1,11 @@
+.single-sedoo_camp_products .main-product {
+    display:flex;
+    flex-direction: row;
+}
+
+
+.single-sedoo_camp_products .main-product aside {
+    flex-grow:1;
+    flex-basis:350px;
+    flex-shrink:1;
+}
