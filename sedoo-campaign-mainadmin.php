@@ -18,6 +18,7 @@ function sedoo_main_admin_page_func() { ?>
                 <p> Nom de campagne : <?php echo $nom_de_campagne; ?> </p>
                 <button id="CreateBackEnd" camp_name="<?php echo $nom_de_campagne; ?>" class="button button-primary"> Récupérer l'identifiant BackEnd </button>
             <?php 
+            }
         } 
         if(get_field('nom_de_la_campagne', 'option') && get_field('id_back_end_campagne', 'option')) { 
             $id_de_campagne = get_field('id_back_end_campagne', 'option');
