@@ -1,4 +1,4 @@
-<?php 
+<?php // campaign main page
 function sedoo_main_admin_page_func() { ?>
     <style> <?php include 'css/back.css'; ?> </style>
     <div class="sedoo_admin_bloc">
