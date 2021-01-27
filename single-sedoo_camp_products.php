@@ -11,7 +11,7 @@ get_header();
         <?php 
             $product_nav_menu_id = get_field('main-products-campain-menu', 'option');
         ?>
-        <campaign-product-tree menu_api_url="'<?php echo home_url(); ?>/wp-json/menus/v1/menus/<?php echo $product_nav_menu_id; ?>'"></campaign-product-tree>
+        <campaign-product-tree menu_api_url="<?php echo home_url(); ?>/wp-json/menus/v1/menus/<?php echo $product_nav_menu_id; ?>"></campaign-product-tree>
         
     </aside>
     <section class="main">
