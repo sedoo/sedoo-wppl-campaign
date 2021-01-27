@@ -10,15 +10,16 @@ function sedoo_main_admin_page_func() { ?>
             <p> Vous n'avez pas <b> nommé votre campagne </b>, faîtes le pour commencer le paramètrage du site </p>
             <a href="<?php menu_page_url('sedoo-campaign-admin-page'); ?>"> Le faire ici </a>
         <?php 
-        }
-        if(get_field('nom_de_la_campagne', 'option') && !get_field('id_back_end_campagne', 'option')) { 
-            $nom_de_campagne = get_field('nom_de_la_campagne', 'option');
-        ?>
-            <h2>Etape 2 : Paramètrage du site </h2>
-            <p> Nom de campagne : <?php echo $nom_de_campagne; ?> </p>
-            <button id="CreateBackEnd" camp_name="<?php echo $nom_de_campagne; ?>" class="button button-primary"> Récupérer l'identifiant BackEnd </button>
-        <?php 
-        } else { 
+        } else {
+            if(!get_field('id_back_end_campagne', 'option')) { 
+                $nom_de_campagne = get_field('nom_de_la_campagne', 'option');
+            ?>
+                <h2>Etape 2 : Paramètrage du site </h2>
+                <p> Nom de campagne : <?php echo $nom_de_campagne; ?> </p>
+                <button id="CreateBackEnd" camp_name="<?php echo $nom_de_campagne; ?>" class="button button-primary"> Récupérer l'identifiant BackEnd </button>
+            <?php 
+        } 
+        if(get_field('nom_de_la_campagne', 'option') && get_field('id_back_end_campagne', 'option')) { 
             $id_de_campagne = get_field('id_back_end_campagne', 'option');
             $nom_de_campagne = get_field('nom_de_la_campagne', 'option');
             ?>
