@@ -1,11 +1,15 @@
-.single-sedoo_camp_products .main-product {
-    display:flex;
-    flex-direction: row;
+.single-sedoo_camp_products .row{
+    margin:auto;
 }
 
+.single-sedoo_camp_products .wrapper-content {
+    max-width: none;
+}
 
-.single-sedoo_camp_products .main-product aside {
-    flex-grow:1;
-    flex-basis:350px;
-    flex-shrink:1;
+.v-treeview-node__root {
+    min-height: 25px !important;
+}
+
+.v-treeview-node__level {
+  width: 15px !important;
 }
