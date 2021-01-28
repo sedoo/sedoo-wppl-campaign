@@ -46,6 +46,7 @@ function sedoo_campaign_register_product_post_type() {
 		'show_in_menu'          => true,
 		'menu_position'         => 5,
 		'show_in_admin_bar'     => true,
+		'rewrite'				=> array('slug' => 'products'),
 		'show_in_nav_menus'     => true,
 		'can_export'            => true,
 		'has_archive'           => true,
