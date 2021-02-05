@@ -365,7 +365,7 @@ function sedoo_campaign_init_create_viewers() {
 		$params_values = array(
 			array(
 				"nom_de_lattribut"   => 'service',
-				"valeur_de_lattribut" => 'https://services.aeris-data.fr/misva/data/v1_0'
+				"valeur_de_lattribut" => 'https://services.aeris-data.fr/campaigns/data/v1_0'
 			)
 		);
 		update_field( 'repeteur_attributs_misva', $params_values, $defautviewer_Id ); // update viewer scripts
