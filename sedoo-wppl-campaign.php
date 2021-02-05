@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sedoo - Campagnes
  * Description: Plugin nécessaire sur un wordpress type campagne
- * Version: 0.0.7
+ * Version: 0.0.8
  * Author: Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master

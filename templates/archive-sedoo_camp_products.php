@@ -2,7 +2,6 @@
 get_header();
 ?>
 
-fsdfsd
 <div id="content" class="site-content">
 	<div id="primary" class="content-area wrapper product_left_menu tocActive">
 		<aside>
@@ -18,7 +17,7 @@ fsdfsd
 		<main id="main" class="site-main">
 			<div class="wrapper-content">
 				<article id="post-" <?php post_class(); ?>>
-                   CHOOOOSED YOUR PRODUKT
+                   <p>CHOOSE YOUR PRODUCT ON THE LEFT</p>
 				</article>
 			</div>
 		</main>
