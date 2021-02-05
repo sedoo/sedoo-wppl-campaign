@@ -118,13 +118,19 @@ if( function_exists('acf_add_options_page') ) {
 	));
 
 }
-// END THE ADMINISTRATION PAGE
+// END THE PARAMETER ADMINISTRATION PAGE
+//////
 
+
+//////
+// THE MAIN ADMINISTRATION PAGE
 add_action('admin_menu', 'sedoo_campaign_menu');
 
 function sedoo_campaign_menu() {
     add_menu_page( 'sedoo-campaign-main-admin-page', 'Ma campagne', 'Ma campagne',
      'sedoo-campaign-admin-main-page', 'sedoo_main_admin_page_func');
 }
+// END THE MAIN ADMINISTRATION PAGE
+//////
 
 ?>
