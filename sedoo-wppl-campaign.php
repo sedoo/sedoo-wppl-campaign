@@ -2,13 +2,14 @@
 /**
  * Plugin Name: Sedoo - Campagnes
  * Description: Plugin nécessaire sur un wordpress type campagne
- * Version: 0.0.8
+ * Version: 0.1.0
  * Author: Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
  */
  
 include 'sedoo-wppl-posttypes.php'; // post types viewers & product
+include 'sedoo-wppl-campaign-func.php'; // post types viewers & product
 include 'sedoo-wppl-admin-param-page.php'; // admin parameters page
 
 
@@ -103,38 +104,38 @@ function sedoo_campaign_update_option_meta() {
 
 
 ///////
-// REGISTER VIEWER BLOC
-function sedoo_campaing_register_viewer_bloc_callback( $block ) {
-	
-	$templateURL = plugin_dir_path(__FILE__) . "blocs/viewerdefault.php";
-    // include a template part from within the "template-parts/block" folder
-    
-	if( file_exists( $templateURL)) {
-		include $templateURL;
-    }
-}
+// REGISTER DEFAULT VIEWER BLOC
+	function sedoo_campaing_register_viewer_bloc_callback( $block ) {
+		
+		$templateURL = plugin_dir_path(__FILE__) . "blocs/viewerdefault.php";
+		// include a template part from within the "template-parts/block" folder
+		
+		if( file_exists( $templateURL)) {
+			include $templateURL;
+		}
+	}
 
-function sedoo_campaing_register_viewer_bloc() {
+	function sedoo_campaing_register_viewer_bloc() {
 
-    // register a testimonial block.
-    acf_register_block_type(array(
-        'name'              => 'sedoo_campaign_default_viewer',
-        'title'             => __('Default Viewer'),
-        'description'       => __('Ajoute un viewer par défaut'),
-        'render_callback'   => 'sedoo_campaing_register_viewer_bloc_callback',
-        'category'          => 'widgets',
-        'icon'              => 'admin-site-alt2',
-        'keywords'          => array( 'viewers', 'sedoo' ),
-    ));
-}
+		// register a testimonial block.
+		acf_register_block_type(array(
+			'name'              => 'sedoo_campaign_default_viewer',
+			'title'             => __('Default Viewer'),
+			'description'       => __('Ajoute un viewer par défaut'),
+			'render_callback'   => 'sedoo_campaing_register_viewer_bloc_callback',
+			'category'          => 'widgets',
+			'icon'              => 'admin-site-alt2',
+			'keywords'          => array( 'viewers', 'sedoo' ),
+		));
+	}
 
-// Check if function exists and hook into setup.
-if( function_exists('acf_register_block_type') ) {
-    add_action('acf/init', 'sedoo_campaing_register_viewer_bloc');
-}
+	// Check if function exists and hook into setup.
+	if( function_exists('acf_register_block_type') ) {
+		add_action('acf/init', 'sedoo_campaing_register_viewer_bloc');
+	}
 
 	////////
-	// BLOC GUTENBERG DU VIEWERS
+	// CHAMPS ACF DU BLOC DEFAULT VIEWERS
 	///////
 	acf_add_local_field_group(array(
 		'key' => 'group_5f846daf38429',
@@ -206,8 +207,7 @@ if( function_exists('acf_register_block_type') ) {
 		'active' => true,
 		'description' => '',
 	));
-
-// END REGISTER VIEWER BLOC
+// END REGISTER DEFAULT VIEWER BLOC
 ///////
 
 
@@ -224,7 +224,6 @@ function sedoo_campaign_single_product_load_template( $single_template ) {
  
     return $single_template;
 }
-
 // END SINGLE PRODUCT PAGE
 //////
 
@@ -232,8 +231,6 @@ function sedoo_campaign_single_product_load_template( $single_template ) {
 ///////
 // PRODUCTS ARCHIVE PAGE
 // template
-
-
 add_filter( 'archive_template', 'sedoo_campaign_archive_product_load_template' );
  
 function sedoo_campaign_archive_product_load_template( $archive_template ) {
@@ -244,7 +241,6 @@ function sedoo_campaign_archive_product_load_template( $archive_template ) {
      }
      return $archive_template;
 }
-
 // PRODUCTS ARCHIVE PAGE
 //////
 

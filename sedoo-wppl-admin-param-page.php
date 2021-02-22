@@ -10,6 +10,7 @@ if( function_exists('acf_add_options_page') ) {
 		'page_title' 	=> 'Paramètres de campagnes',
 		'menu_title'	=> 'Paramètres de campagne',
 		'menu_slug' 	=> 'sedoo-campaign-admin-page',
+		'parent_slug'	=> 'sedoo-campaign-admin-main-page',
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false
     ));
@@ -40,7 +41,7 @@ if( function_exists('acf_add_options_page') ) {
 			),
 			array(
 				'key' => 'field_600ac80c3e15c',
-				'label' => 'Menu des produits',
+				'label' => 'ID Menu des produits',
 				'name' => 'main-products-campain-menu',
 				'type' => 'text',
 				'instructions' => '',
@@ -54,6 +55,27 @@ if( function_exists('acf_add_options_page') ) {
 				'default_value' => '',
 				'placeholder' => '',
 				'prepend' => '',
+				'append' => '',
+				'readonly'=> 1,
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_600ac80c3e16c',
+				'label' => 'ID Menu principal de la campagne',
+				'name' => 'main-campain-menu',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'readonly'=> 0,
 				'append' => '',
 				'maxlength' => '',
 			),
@@ -93,7 +115,67 @@ if( function_exists('acf_add_options_page') ) {
 				'default_value' => '',
 				'placeholder' => '',
 				'prepend' => '',
+				'readonly'=> 1,
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6006f6b745590',
+				'label' => 'ID composant web catalogue',
+				'name' => 'id_composant_catalogue',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
 				'readonly'=> 0,
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6006f6b748756',
+				'label' => 'ID page data policy',
+				'name' => 'id_page_data_policy',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'readonly'=> 1,
+				'append' => '',
+				'maxlength' => '',
+			),
+			array(
+				'key' => 'field_6006f6b759246',
+				'label' => 'ID page catalogue',
+				'name' => 'id_page_catalogue',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'readonly'=> 1,
 				'append' => '',
 				'maxlength' => '',
 			)
@@ -128,7 +210,7 @@ add_action('admin_menu', 'sedoo_campaign_menu');
 
 function sedoo_campaign_menu() {
     add_menu_page( 'sedoo-campaign-main-admin-page', 'Ma campagne', 'Ma campagne',
-     'sedoo-campaign-admin-main-page', 'sedoo_main_admin_page_func');
+     'sedoo-campaign-admin-main-page', 'sedoo_main_admin_page_func'); // in sedoo-campaign-mainadmin.php
 }
 // END THE MAIN ADMINISTRATION PAGE
 //////
