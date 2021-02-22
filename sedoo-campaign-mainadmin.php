@@ -38,18 +38,28 @@ function sedoo_main_admin_page_func() { ?>
         <?php } ?>
     </div>
 
-    <div class="sedoo_admin_bloc">
-    <?php if(get_field('nom_de_la_campagne', 'option')) {?>
-        <h2> Administration des produits </h2>
-        <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-        <script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
-        <input-product-management campaign="<?php echo $nom_de_campagne; ?>"></input-product-management>
+    <?php if(get_field('nom_de_la_campagne', 'option') && get_field('id_back_end_campagne', 'option')) {?>
+        <ul class="campaign_param_tabs_main"> 
+            <li class="admin_tabs_button active" sedoo_campaign_tab="admin_camp"> Gestion de la campagne </li>
+            <li class="admin_tabs_button" sedoo_campaign_tab="admin_prod"> Gestion des produits </li>
+            <li class="admin_tabs_button noclick suppage"><a href="admin.php?page=sedoo-campaign-admin-page"> Paramètres</a> </li>
+        </ul>
+        <div class="sedoo_admin_bloc tabbed">
+            <div class="tab_admin_camp admin_camp active">
+                <campaign-metadata uuid="<?php echo $nom_de_campagne; ?>" ></campaign-metadata>
+            </div>
+            <div class="tab_admin_prod admin_prod">
+                <h2> Administration des produits </h2>
+                <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+                <script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
+                <input-product-management campaign="<?php echo $nom_de_campagne; ?>"></input-product-management>
+            </div>
+        </div>
     <?php } ?>
-    </div>
 <?php
-echo '<script src="'.plugin_dir_url( __FILE__ ) . 'js/widget_dashboard.js"></script>';
+echo '<script src="'.plugin_dir_url( __FILE__ ) . 'js/widget_main_page.js"></script>';
 } ?>
 
           
