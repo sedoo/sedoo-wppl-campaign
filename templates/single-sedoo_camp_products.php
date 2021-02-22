@@ -1,4 +1,5 @@
 <?php
+// Single product page
 get_header();
 ?>
 

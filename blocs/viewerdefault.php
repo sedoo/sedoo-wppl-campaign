@@ -38,7 +38,8 @@ if(is_admin() == true) {
         ///////
         if( have_rows('elements_inclus_misva', $viewer_misva[0]) ):
             while( have_rows('elements_inclus_misva', $viewer_misva[0]) ): the_row(); 
-                echo the_sub_field('script_misva', $viewer_misva[0]);
+                $nom_campagne = get_field('nom_de_la_campagne', 'option');
+                echo str_replace('$$CAMPAIGNNAME$$', $nom_campagne, the_sub_field('script_misva', $viewer_misva[0]));
             endwhile; 
         endif;
         
@@ -74,13 +75,13 @@ if(is_admin() == true) {
         // Je stock le nom de la balise du viewer
         ///////
         $nom_balise = get_field('nom_de_la_balise', $viewer_misva[0]);
-
+        $nom_campagne = get_field('nom_de_la_campagne', 'option');
         ?>
 
         <!--////////
-        // J'afiche la section composant Misva avec les attributs et la classe
+        // J'afiche le viewer avec les attributs et la classe
         ///////-->
         <section class="sedoo-misva-component <?php echo $className;?>">
-            <?php echo '<'.$nom_balise.' '.$string_construct_attributes.' product="'.$listing_produit.'" breadcrumb="'.htmlspecialchars($listing_breadcrumb).'"> </'.$nom_balise.'>'; ?>
+            <?php echo '<'.$nom_balise.' '.$string_construct_attributes.' campaign="'.$nom_campagne.'" product="'.$listing_produit.'" breadcrumb="'.htmlspecialchars($listing_breadcrumb).'"> </'.$nom_balise.'>'; ?>
         </section>
 <?php } ?>
