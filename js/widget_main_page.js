@@ -1,3 +1,6 @@
+
+
+
 // ON CLICK GET BACKEND ID
 jQuery('#CreateBackEnd').click(function() {
     jQuery(this).prop('disabled', true);
@@ -31,6 +34,7 @@ jQuery('#CreateBackEnd').click(function() {
             }
             updateOptionMeta('id_back_end_campagne', backEndId);
             jQuery('#CreateBackEnd').text('BackEnd Ok');
+            jQuery('#CreateBackEnd').after('<a class="button button-primary nextstpbtn" href="admin.php?page=sedoo-campaign-admin-main-page">Etape suivante</a>');
         }
     });
 });

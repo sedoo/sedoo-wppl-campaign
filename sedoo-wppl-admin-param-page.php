@@ -5,7 +5,7 @@ include 'sedoo-campaign-mainadmin.php';
 //////
 // THE PARAMETER ADMINISTRATION PAGE
 if( function_exists('acf_add_options_page') ) {
-	// the 
+	// the page
 	acf_add_options_page(array(
 		'page_title' 	=> 'Paramètres de campagnes',
 		'menu_title'	=> 'Paramètres de campagne',
@@ -38,6 +38,26 @@ if( function_exists('acf_add_options_page') ) {
 				'prepend' => '',
 				'append' => '',
 				'maxlength' => '',
+			),	
+			array(
+				'key' => 'field_6006f6b727171',
+				'label' => 'ID item menu data access',
+				'name' => 'data_access_menu_item',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => 'hidden',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'readonly'=> 1,
+				'append' => '',
+				'maxlength' => '',
 			),
 			array(
 				'key' => 'field_600ac80c3e15c',
@@ -49,7 +69,7 @@ if( function_exists('acf_add_options_page') ) {
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'hidden',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -69,13 +89,13 @@ if( function_exists('acf_add_options_page') ) {
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'hidden',
 					'id' => '',
 				),
 				'default_value' => '',
 				'placeholder' => '',
 				'prepend' => '',
-				'readonly'=> 0,
+				'readonly'=> 1,
 				'append' => '',
 				'maxlength' => '',
 			),
@@ -109,7 +129,7 @@ if( function_exists('acf_add_options_page') ) {
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'hidden',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -129,13 +149,13 @@ if( function_exists('acf_add_options_page') ) {
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'hidden',
 					'id' => '',
 				),
 				'default_value' => '',
 				'placeholder' => '',
 				'prepend' => '',
-				'readonly'=> 0,
+				'readonly'=> 1,
 				'append' => '',
 				'maxlength' => '',
 			),
@@ -149,7 +169,7 @@ if( function_exists('acf_add_options_page') ) {
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'hidden',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -169,7 +189,7 @@ if( function_exists('acf_add_options_page') ) {
 				'conditional_logic' => 0,
 				'wrapper' => array(
 					'width' => '',
-					'class' => '',
+					'class' => 'hidden',
 					'id' => '',
 				),
 				'default_value' => '',
@@ -199,10 +219,22 @@ if( function_exists('acf_add_options_page') ) {
 		'description' => '',
 	));
 
+
+	
 }
 // END THE PARAMETER ADMINISTRATION PAGE
 //////
 
+///////
+// INCLUDE BACK CSS FOR CAMPAIGN ADMIN PAGE
+function sedoo_campaign_include_back_css($hook_suffix) {
+	if($hook_suffix == 'toplevel_page_sedoo-campaign-admin-main-page') {
+		wp_enqueue_style('sedoo_campain_back_css', plugin_dir_url( __FILE__ ) . '/css/back.css');
+	}
+}
+add_action('admin_enqueue_scripts', 'sedoo_campaign_include_back_css');
+// END INCLUDE BACK CSS FOR CAMPAIGN ADMIN PAGE
+///////
 
 //////
 // THE MAIN ADMINISTRATION PAGE
