@@ -62,3 +62,11 @@
 .tab_admin_camp.active {
     display: block;
 }
+
+.sedoo_admin_bloc .v-card__text input[type="text"]{
+    border:none;
+}
+
+.nextstpbtn {
+    margin-left: 10px;
+}

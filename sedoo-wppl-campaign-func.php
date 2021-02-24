@@ -1,4 +1,5 @@
 <?php 
+
 ///////
 // CREATE THE PRODUCT MENU
 function sedoo_campaign_init_product_menu() {
@@ -31,6 +32,13 @@ function sedoo_campaign_init_main_menu() {
             $locations['primary-menu'] = $mainMenuId;
             set_theme_mod( 'nav_menu_locations', $locations );
         }
+        $menu_data_access_item = wp_update_nav_menu_item($mainMenuId, 0, array(
+            'menu-item-title' => 'Data Access',
+            'menu-item-url' => '#',
+            'menu-item-status' => 'publish',
+            'menu-item-type' => 'custom', // optional
+        ));
+       update_field('data_access_menu_item', $menu_data_access_item, 'option');
     }
 }
 add_action( 'init', 'sedoo_campaign_init_main_menu', 0 );
@@ -62,14 +70,15 @@ function sedoo_campaign_create_data_policy_page() {
         $datapolicycontent = "Ici mon contenu";
         $page_id = sedoo_campaign_create_post('Data Policy', $datapolicycontent, 'page', 'id_page_data_policy');
         if(get_field('main-campain-menu', 'option')) { 
-            $id_product_menu = get_field('main-campain-menu', 'option');
-            var_dump($id_product_menu);
-            wp_update_nav_menu_item($id_product_menu, 0, array(
+            $id_main_menu = get_field('main-campain-menu', 'option');
+            $id_data_acces_item = get_field('data_access_menu_item', 'option');
+            $item = wp_update_nav_menu_item($id_main_menu, 0, array(
                 'menu-item-title' => 'Data Policy',
                 'menu-item-object-id' => $page_id,
                 'menu-item-object' => 'page',
                 'menu-item-type' => 'post_type',
-                'menu-item-status' => 'publish')
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $id_data_acces_item)
             );
         }
     }
@@ -95,7 +104,7 @@ function sedoo_campaign_init_create_catalogue() {
 			array("script"   => '<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>'),
 			array("script"   => '<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js">/script>'),
 			array("script"   => '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>'),
-			array("script"   => '<script>  document.ssoAerisInitOptions = {     url : "https://sso.aeris-data.fr/auth",     realm : "aeris",     clientId : "$$CAMPAIGNNAME$$-vjs",     resource: "catalogue-aeris-services",  authorizedDomains: ["https://services.aeris-data.fr/"]    } </script>'),
+			array("script"   => '<script>  document.ssoAerisInitOptions = {url : "https://sso.aeris-data.fr/auth",     realm : "aeris",     clientId : "eurec4a-vjs",     resource: "catalogue-aeris-services",  authorizedDomains: ["https://services.aeris-data.fr/"]    } </script>'),
 			array("script"   => '<script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sedoo/snapshot/aeris-catalogue-component/0.1.0-snapshot"></script>')
 		);
 		update_field( 'elements_inclus', $scripts_values, $catalogue_component_Id ); // update viewer scripts
@@ -109,12 +118,14 @@ function sedoo_campaign_init_create_catalogue() {
         $page_catalogue_id = sedoo_campaign_create_post('Page Catalogue', $contenu_page_catalogue, 'page', 'id_page_catalogue');
         if(get_field('main-campain-menu', 'option')) { 
             $id_product_menu = get_field('main-campain-menu', 'option');
+            $id_data_acces_item = get_field('data_access_menu_item', 'option');
             wp_update_nav_menu_item($id_product_menu, 0, array( // ADD PAGE TO THE MAIN MENU
                 'menu-item-title' => 'Catalogue',
                 'menu-item-object-id' => $page_catalogue_id,    
                 'menu-item-object' => 'page',
                 'menu-item-type' => 'post_type',
-                'menu-item-status' => 'publish')
+                'menu-item-status' => 'publish',
+                'menu-item-parent-id' => $id_data_acces_item)
             );
         }
     }
@@ -164,6 +175,25 @@ add_action( 'init', 'sedoo_campaign_init_create_viewers', 0 );
 // END CREATE THE DEFAULT VIEWER
 ///////
 
+
+///////
+// DETECT IF USER TRIED TO DELETE A POST THAT IS USED IN CAMPAIGN (JUST SHOW MESSAGE HERE)
+add_action( 'admin_notices', 'sedoo_campaign_wp_notice_deletepostusedincampaign' );
+function sedoo_campaign_wp_notice_deletepostusedincampaign() {
+    $message = get_transient( get_current_user_id() . '_sedoo_campaign_transient_cantremovepost_error' );
+
+    if ( $message ) {
+        delete_transient( get_current_user_id() . '_sedoo_campaign_transient_cantremovepost_error' );
+
+        printf( '<div class="%1$s"><p>%2$s</p></div>',
+            'notice notice-error is-dismissible _sedoo_campaign_transient_cantremovepost_error',
+            $message
+        ); 
+    }
+}
+// DETECT IF USER TRIED TO DELETE A POST THAT IS USED IN CAMPAIGN (JUST SHOW MESSAGE HERE)
+///////
+
 //////
 // REMOVE DELETE POSSIBILITIE FOR THE USED ID
 
@@ -178,13 +208,18 @@ add_action( 'init', 'sedoo_campaign_init_create_viewers', 0 );
         // get default viewer 
         array_push($restrictedIdArray, get_field('id_viewer_defaut', 'option'));
 
-        if(in_array($post_ID, $restrictedIdArray))
-        {
-            echo "Vous ne pouvez pas supprimer ce contenu, il est utilisé dans l'outil de campagne.";
+        if(in_array($post_ID, $restrictedIdArray)) {    
+            // save a transient with the message that user can't delete this
+            set_transient( get_current_user_id() . '_sedoo_campaign_transient_cantremovepost_error', 
+            __( "Vous ne pouvez pas supprimer ce contenu, il est utilisé dans l'outil de campagne.", 'sedoo_campaign_remove_notice' )
+            ); 
+            // redirect the user and exit to prevent deletion
+            wp_redirect(admin_url());
+    
             exit;
         }
     }
-    add_action('wp_trash_post', 'sedoo_campaign_remove_delete_possibilitie_post_types', 10, 1);
+    add_action('wp_trash_post', 'sedoo_campaign_remove_delete_possibilitie_post_types', 1);
 
 
     // THE MENUS (product menu and main menu)
@@ -201,4 +236,17 @@ add_action( 'init', 'sedoo_campaign_init_create_viewers', 0 );
 // END REMOVE DELETE POSSIBILITIE FOR THE USED ID
 //////
 
+
+// ADD BUTTON FROM CAMPAIGN PARAM TO CAMPAIGN ADMIN WHEN CAMPAIGN NAME IS SET AND CAMPAIGN BACKEND ID IS NOT SET
+////
+function sedoo_campaign_button_to_get_backend_id( $field ) {
+    if(get_field('nom_de_la_campagne', 'option') && !get_field('id_back_end_campagne', 'option')) {
+        echo '<br /><a class="button button-primary" href="admin.php?page=sedoo-campaign-admin-main-page">Etape suivante</a>';
+    }
+}
+
+add_action('acf/render_field/name=nom_de_la_campagne', 'sedoo_campaign_button_to_get_backend_id'); // under the campain name field
+
+// ADD BUTTON FROM CAMPAIGN PARAM TO CAMPAIGN ADMIN WHEN CAMPAIGN NAME IS SET AND CAMPAIGN BACKEND ID IS NOT SET
+////
 ?>
