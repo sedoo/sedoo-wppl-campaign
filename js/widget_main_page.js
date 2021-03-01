@@ -99,8 +99,12 @@ jQuery('.admin_tabs_button').click(function() {
     if(jQuery(this).hasClass('noclick')) {} 
     else {
         var tab_active_class = jQuery(this).attr('sedoo_campaign_tab');
-        jQuery('.tab_admin_camp, .admin_tabs_button').removeClass('active');
+        console.log(tab_active_class);
+        // les tabs
+        jQuery('.admin_tabs_button').removeClass('active');
         jQuery(this).addClass('active');
+        // le contenun des tabs
+        jQuery('.tab_content').removeClass('active');
         jQuery('.'+tab_active_class).toggleClass('active');
     }
 });

@@ -166,7 +166,7 @@ function sedoo_campaign_init_create_viewers() {
 			)
 		);
 		update_field( 'repeteur_attributs_misva', $params_values, $defautviewer_Id ); // update viewer scripts
-		update_field( 'nom_de_la_balise', 'campaign-component', $defautviewer_Id ); // update viewer div
+		update_field( 'nom_de_la_balise', 'campaign-product', $defautviewer_Id ); // update viewer div
 
 		update_field( 'field_600976ee6a445', $name, $sedoo_campaign_product_id);
 	}
@@ -220,6 +220,9 @@ function sedoo_campaign_wp_notice_deletepostusedincampaign() {
         }
     }
     add_action('wp_trash_post', 'sedoo_campaign_remove_delete_possibilitie_post_types', 1);
+    add_action('rest_delete_sedoo_camp_viewers', 'sedoo_campaign_remove_delete_possibilitie_post_types', 1);
+    add_action('rest_delete_vuejs', 'sedoo_campaign_remove_delete_possibilitie_post_types', 1);
+    add_action('rest_delete_pages', 'sedoo_campaign_remove_delete_possibilitie_post_types', 1);
 
 
     // THE MENUS (product menu and main menu)
