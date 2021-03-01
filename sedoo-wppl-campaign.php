@@ -87,7 +87,7 @@ function sedoo_campaign_create_or_update_product() {
 
 
 ///////
-// UPDATE GLOBAL META
+// UPDATE GLOBAL META FOR JS AJAX CALL
 add_action('wp_ajax_sedoo_campaign_update_option_meta', 'sedoo_campaign_update_option_meta');
 add_action('wp_ajax_nopriv_sedoo_campaign_update_option_meta', 'sedoo_campaign_update_option_meta');
 function sedoo_campaign_update_option_meta() {
@@ -98,7 +98,7 @@ function sedoo_campaign_update_option_meta() {
 
 	wp_die();
 }
-// END UPDATE GLOBAL META
+// END UPDATE GLOBAL META FOR JS AJAX CALL
 ///////
 
 

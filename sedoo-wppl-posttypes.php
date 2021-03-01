@@ -81,6 +81,7 @@
 					'default_value' => '',
 					'placeholder' => '',
 					'prepend' => '',
+					'readonly' => 1,
 					'append' => '',
 					'maxlength' => '',
 				),
@@ -101,6 +102,7 @@
 					'placeholder' => '',
 					'prepend' => '',
 					'append' => '',
+					'readonly' => 1,
 					'maxlength' => '',
 				)
 			),

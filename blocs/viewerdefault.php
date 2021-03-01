@@ -14,7 +14,7 @@ if(is_admin() == true) {
     }
     </style>
     <?php 
-        echo '<div class="sedoo_related_block_admin_block"><h2> Bloc Viewer Misva </h2> <span> Visible seulement en front-office </span></div>';
+        echo '<div class="sedoo_related_block_admin_block"><h2> Bloc Viewer </h2> <span> Visible seulement en front-office </span></div>';
 } else {
         ////////
         // Je crée ma classe pour l'alignement wordpress etc
