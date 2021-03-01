@@ -44,10 +44,10 @@ function sedoo_main_admin_page_func() { ?>
             <li class="admin_tabs_button noclick suppage"><a href="admin.php?page=sedoo-campaign-admin-page"> Paramètres</a> </li>
         </ul>
         <div class="sedoo_admin_bloc tabbed">
-            <div class="tab_admin_camp admin_camp active">
+            <div class="tab_admin_camp tab_content admin_camp active">
                 <campaign-metadata uuid="<?php echo $nom_de_campagne; ?>" ></campaign-metadata>
             </div>
-            <div class="tab_admin_prod admin_prod">
+            <div class="tab_admin_prod tab_content admin_prod">
                 <h2> Administration des produits </h2>
                 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">

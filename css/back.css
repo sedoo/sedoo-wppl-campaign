@@ -23,7 +23,7 @@
     margin-left: 10px;
 }
 
-.tab_admin_camp {
+.tab_admin_camp, .tab_admin_prod {
     display: none;
 }
 
@@ -59,7 +59,8 @@
     text-decoration: none;
 }
 
-.tab_admin_camp.active {
+.tab_admin_camp.active, 
+.tab_admin_prod.active {
     display: block;
 }
 
