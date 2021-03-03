@@ -41,9 +41,22 @@ function sedoo_campaign_create_or_update_product() {
 	if(sedoo_campaign_the_slug_exists($slug,'sedoo_camp_products') != false) { // check here if product exist or not
 		// UPDATE THE PRODUCT
 		$sedoo_campaign_product_id = sedoo_campaign_the_slug_exists($slug,'sedoo_camp_products');
+
+		// check if product menu is empty, so if is empty, insert product into products menu
+		$id_product_menu = get_field('main-products-campain-menu', 'option');
+		$product_menu = wp_get_nav_menu_object($id_product_menu);
+		if($product_menu->count == 0) {
+			wp_update_nav_menu_item($id_product_menu, 0, array(
+				'menu-item-title' => $name,
+				'menu-item-object-id' => $sedoo_campaign_product_id,    
+				'menu-item-object' => 'sedoo_camp_products',
+				'menu-item-type' => 'post_type',
+				'menu-item-status' => 'publish')
+			);
+		}
 	}
 	else {
-		// INSERT THE PRODUCT
+		// INSERT THE NEW PRODUCT
 		$sedoo_campaign_new_product = array(
 			'post_title'    => wp_strip_all_tags( $name ),
 			'post_name'		=> $slug,
@@ -67,19 +80,19 @@ function sedoo_campaign_create_or_update_product() {
 		
 	}
 	
-	//// USE THE GOOD VIEWER FOR THE PRODUCT
-	$id_default_viewer = get_field('id_viewer_defaut', 'option');
-
 	$post_for_content_creation = array(
 		'ID'           => $sedoo_campaign_product_id,
-		'post_content'	=> '<!-- wp:acf/sedoo-campaign-default-viewer {"id":"block_600ab64e89314","name":"acf/sedoo-campaign-default-viewer", "data":{"field_5f846db6e9d25":["'.$id_default_viewer.'"],"field_5f858dbfb1014":["'.$slug.'"]},"align":"","mode":"preview"} /-->'
+		'post_content'	=> ''
 	);
 
 	// Update the post into the database
 	wp_update_post( $post_for_content_creation );
 
-	update_field( 'field_600976ee6a445', $name, $sedoo_campaign_product_id);
-	update_field( 'field_600977076a446', $slug, $sedoo_campaign_product_id);
+	update_field( 'field_600976ee6a445', $name, $sedoo_campaign_product_id); // name field
+	update_field( 'field_600977076a446', $slug, $sedoo_campaign_product_id); // id field
+	update_field( 'field_600979ee6a655', $_POST['product']['_class'], $sedoo_campaign_product_id); // type field
+
+	
 	wp_die();
 }
 // END CREATE OR UPDATE A PRODUCT
