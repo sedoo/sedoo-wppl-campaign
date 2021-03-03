@@ -41,6 +41,20 @@ jQuery('#CreateBackEnd').click(function() {
 
 // ON CLICK SYNCHRONIZE PRODUCTS
 jQuery('#SynchroniseProducts').click(function() {
+
+    // check if product menu exist, if not, just recreate it before importation
+    jQuery.ajax({
+        url: ajaxurl,
+        type:'GET',
+        data: { 
+            action : 'sedoo_cmpaign_check_product_menu',
+        },
+        success:function(result) {
+        }
+    });
+
+
+
     var id_backend = jQuery(this).attr('id_backend');
     jQuery(this).prop('disabled', true);
     jQuery(this).text('Loading..');

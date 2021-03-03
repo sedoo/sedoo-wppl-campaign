@@ -70,13 +70,14 @@ if( function_exists('acf_add_options_page') ) {
 				'wrapper' => array(
 					'width' => '',
 					'class' => 'hidden',
+					'class' => '',
 					'id' => '',
 				),
 				'default_value' => '',
 				'placeholder' => '',
 				'prepend' => '',
 				'append' => '',
-				'readonly'=> 1,
+				'readonly'=> 0,
 				'maxlength' => '',
 			),
 			array(

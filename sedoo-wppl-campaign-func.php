@@ -14,6 +14,22 @@ add_action( 'init', 'sedoo_campaign_init_product_menu', 0 );
 // END CREATE THE PRODUCT MENU
 ///////
 
+//////
+// CHECK IF PRODUCT MENU IS EXISTING OR NOT BEFORE IMPORT PRODUCTS
+add_action('wp_ajax_sedoo_cmpaign_check_product_menu', 'sedoo_cmpaign_check_product_menu');
+add_action('wp_ajax_nopriv_sedoo_cmpaign_check_product_menu', 'sedoo_cmpaign_check_product_menu');
+function sedoo_cmpaign_check_product_menu() {
+    $product_menu_ID = get_field('main-products-campain-menu', 'option');
+    if(wp_get_nav_menu_object($product_menu_ID) == false) { // si il n'y a plus de menu produits, j'en recrée un
+        $productMenuId = wp_create_nav_menu('sedoo-campain-product-main-menu-'.rand());        
+        update_field('main-products-campain-menu', $productMenuId, 'option');
+    }
+    wp_die();
+}
+// END CHECK IF PRODUCT MENU IS EXISTING OR NOT BEFORE IMPORT PRODUCTS
+//////
+
+
 
 ///////
 // CREATE THE MAIN MENU

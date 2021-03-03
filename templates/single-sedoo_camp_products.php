@@ -18,12 +18,31 @@ get_header();
 		</aside>
 		<main id="main" class="site-main">
 			<div class="wrapper-content">
-				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> 
                     <?php 
                         while ( have_posts() ) : the_post();
-                            echo the_content();
+                           echo the_content();
                         endwhile;
                     ?>
+                    <section class="sedoo-campaign-view-product">
+                        <?php 
+                            $product = get_field('id');
+                            $breadcrumb = get_field('id');
+                            $campaign = get_field('nom_de_la_campagne', 'option');   
+
+                            // selection du type de viewer
+                            $type_viewer = get_field('type');
+                            $attribut_viewer = '';
+                            switch ($type_viewer) {
+                                case 'calendarbasedproduct':
+                                    break;
+                                case 'filetree':
+                                    $attribut_viewer= 'viewer="tree"';
+                                    break;
+                            }
+                        ?>
+                        <campaign-product <?php echo $attribut_viewer; ?> service="https://services.aeris-data.fr/campaigns/data/v1_0" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb="<?php echo $breadcrumb; ?>" vce-ready="">
+                    </section> 
 				</article>
 			</div>
 		</main>
