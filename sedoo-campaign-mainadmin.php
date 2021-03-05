@@ -1,5 +1,5 @@
-<?php // campaign main page
-function sedoo_main_admin_page_func() { ?>
+<?php 
+function sedoo_main_admin_page_func() { // campaign main page?>
     <div class="sedoo_admin_bloc">
         <h1> Gestion de la campagne </h1>
         <?php 
