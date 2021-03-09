@@ -11,7 +11,7 @@
 include 'sedoo-wppl-posttypes.php'; // post types viewers & product
 include 'sedoo-wppl-campaign-func.php'; // post types viewers & product
 include 'sedoo-wppl-admin-param-page.php'; // admin parameters page
-
+include 'inc/sedoo-wppl-campaign-menu-json.php';
 
 ///////
 // CREATE OR UPDATE A PRODUCT
