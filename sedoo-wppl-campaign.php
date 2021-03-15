@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sedoo - Campagnes
  * Description: Plugin nécessaire sur un wordpress type campagne
- * Version: 0.1.5
+ * Version: 0.1.6
  * Author: Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
@@ -97,6 +97,29 @@ function sedoo_campaign_create_or_update_product() {
 }
 // END CREATE OR UPDATE A PRODUCT
 ///////
+
+
+add_action('wp_ajax_sedoo_campaign_check_and_delete_missing_products_in_the_flux', 'sedoo_campaign_check_and_delete_missing_products_in_the_flux');
+add_action('wp_ajax_nopriv_sedoo_campaign_check_and_delete_missing_products_in_the_flux', 'sedoo_campaign_check_and_delete_missing_products_in_the_flux');
+/////////
+//  END CHECK FOR MISSING PRODUCTS IN THE JS FLUX
+function sedoo_campaign_check_and_delete_missing_products_in_the_flux() {
+	$productsIdArray = $_POST['productsIdArray']; // get backend products id array
+	$get_wp_products_args = array(
+		'numberposts' => -1,
+		'post_type'   => 'sedoo_camp_products'
+	);
+	$AllWPProductsList = get_posts( $get_wp_products_args );
+	foreach($AllWPProductsList as $WPproduct) { // foreach product in WP, if is not in the js anymore, just delete it
+		$WPproduct_campaign_id = get_field('id', $WPproduct->ID);
+		if(in_array($WPproduct_campaign_id, $productsIdArray)) {
+		} else {
+			wp_delete_post($WPproduct->ID);
+		}
+	}
+}
+//  END CHECK FOR MISSING PRODUCTS IN THE JS FLUX
+/////////
 
 
 ///////

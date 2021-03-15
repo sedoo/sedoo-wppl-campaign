@@ -32,7 +32,7 @@ jQuery('#CreateBackEnd').click(function() {
             else {
                 backEndId = result.id;
             }
-            updateOptionMeta('id_back_end_campagne', backEndId);
+            sedoo_campaign_updateOptionMeta('id_back_end_campagne', backEndId);
             jQuery('#CreateBackEnd').text('BackEnd Ok');
             jQuery('#CreateBackEnd').after('<a class="button button-primary nextstpbtn" href="admin.php?page=sedoo-campaign-admin-main-page">Etape suivante</a>');
         }
@@ -52,9 +52,7 @@ jQuery('#SynchroniseProducts').click(function() {
         success:function(result) {
         }
     });
-
-
-
+    var products_id_array = [];
     var id_backend = jQuery(this).attr('id_backend');
     jQuery(this).prop('disabled', true);
     jQuery(this).text('Loading..');
@@ -64,20 +62,34 @@ jQuery('#SynchroniseProducts').click(function() {
         type:'GET',
         success:function(result) {
             for(i;i < result.length; i++) {
-                createOrUpdateCampaignProduct(result[i], ajaxurl);
+                sedoo_campaign_createOrUpdateCampaignProduct(result[i], ajaxurl, i, result.length);
+                products_id_array.push(result[i].id);
             }
+            sedoo_campaign_check_for_deleted_product(products_id_array);
         },
         complete:function(result) {
-            jQuery("#SynchroniseProducts").text(i +' Synchronisé !');
         }
     }); 
 })
 
 // Les fonctions utilisées pour apeller les fonctions php
 
+// checker pour supprimer les produits plus dans le flux
+function sedoo_campaign_check_for_deleted_product(productsIdArray) {
+    jQuery.ajax({
+        url: ajaxurl,
+        type:'POST',
+        data: { 
+            action : 'sedoo_campaign_check_and_delete_missing_products_in_the_flux',
+            'productsIdArray':productsIdArray
+        },
+        success:function(result) {
+        }
+    });
+}
 
 // créer un produit, ou le mettre à jour si il existe déjà
-function createOrUpdateCampaignProduct(product, ajaxurl) {
+function sedoo_campaign_createOrUpdateCampaignProduct(product, ajaxurl, i, total) {
     jQuery.ajax({
         url: ajaxurl,
         type:'POST',
@@ -86,14 +98,14 @@ function createOrUpdateCampaignProduct(product, ajaxurl) {
             'product':product
         },
         success:function(result) {
-            console.log(result);
+            jQuery("#SynchroniseProducts").text(i +'/'+ total+ ' Synchronisé(s) !');
         }
     });
 }
 
 
 // update une meta de la page "PARAMETRES DE CAMPAGNE"
-function updateOptionMeta(metakey, metavalue) {
+function sedoo_campaign_updateOptionMeta(metakey, metavalue) {
     jQuery.ajax({
         url: ajaxurl,
         type:'POST',
