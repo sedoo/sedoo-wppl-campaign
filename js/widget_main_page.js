@@ -64,11 +64,10 @@ jQuery('#SynchroniseProducts').click(function() {
         type:'GET',
         success:function(result) {
             for(i;i < result.length; i++) {
-                createOrUpdateCampaignProduct(result[i], ajaxurl);
+                createOrUpdateCampaignProduct(result[i], ajaxurl, i, result.length-1);
             }
         },
         complete:function(result) {
-            jQuery("#SynchroniseProducts").text(i +' Synchronisé !');
         }
     }); 
 })
@@ -77,7 +76,7 @@ jQuery('#SynchroniseProducts').click(function() {
 
 
 // créer un produit, ou le mettre à jour si il existe déjà
-function createOrUpdateCampaignProduct(product, ajaxurl) {
+function createOrUpdateCampaignProduct(product, ajaxurl, i, total) {
     jQuery.ajax({
         url: ajaxurl,
         type:'POST',
@@ -86,7 +85,7 @@ function createOrUpdateCampaignProduct(product, ajaxurl) {
             'product':product
         },
         success:function(result) {
-            console.log(result);
+            jQuery("#SynchroniseProducts").text(i +'/'+ total+ ' Synchronisé(s) !');
         }
     });
 }
