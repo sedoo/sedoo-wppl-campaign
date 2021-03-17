@@ -31,7 +31,6 @@ if(is_admin() == true) {
         // Je recupuère le viewer utilisé dans le bloc
         ////////
         $viewer_misva = get_field('type_de_viewer_a_charger');
-
         
         ////////
         // Je récupère les lignes de scripts (css et js) du viewer et les affiche
@@ -39,7 +38,14 @@ if(is_admin() == true) {
         if( have_rows('elements_inclus_misva', $viewer_misva[0]) ):
             while( have_rows('elements_inclus_misva', $viewer_misva[0]) ): the_row(); 
                 $nom_campagne = get_field('nom_de_la_campagne', 'option');
-                echo str_replace('$$CAMPAIGNNAME$$', $nom_campagne, the_sub_field('script_misva', $viewer_misva[0]));
+                $campaign_replaced = str_replace('$$CAMPAIGNNAME$$', $nom_campagne, the_sub_field('script_misva', $viewer_misva[0]));
+
+                $current_lang = substr( get_bloginfo ( 'language' ), 0, 2 )
+                if ( function_exists('pll_the_languages') ) {
+                    $current_lang = pll_current_language();
+                }
+
+                echo str_replace('$$LANGUAGE$$', $current_lang, $campaign_replaced);
             endwhile; 
         endif;
         

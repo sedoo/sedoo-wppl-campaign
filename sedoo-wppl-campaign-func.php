@@ -125,7 +125,7 @@ function sedoo_campaign_init_create_catalogue() {
 		);
 		update_field( 'elements_inclus', $scripts_values, $catalogue_component_Id ); // update viewer scripts
 
-        $block_content = '<aeris-catalogue language="en" project="$$CAMPAIGNNAME$$"  blank-request="true"></aeris-catalogue>';
+        $block_content = '<aeris-catalogue language="$$LANGUAGE$$" project="$$CAMPAIGNNAME$$"  blank-request="true"></aeris-catalogue>';
 
         update_field( 'contenu_du_block', $block_content, $catalogue_component_Id ); // update viewer div
 
