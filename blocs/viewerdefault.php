@@ -38,7 +38,7 @@ if(is_admin() == true) {
         if( have_rows('elements_inclus_misva', $viewer_misva[0]) ):
             while( have_rows('elements_inclus_misva', $viewer_misva[0]) ): the_row(); 
                 $nom_campagne = get_field('nom_de_la_campagne', 'option');
-                $campaign_replaced = str_replace('$$CAMPAIGNNAME$$', $nom_campagne, the_sub_field('script_misva', $viewer_misva[0]));
+                $campaign_replaced = str_replace('$$CAMPAIGNNAME$$', strtolower($nom_campagne), the_sub_field('script_misva', $viewer_misva[0]));
 
                 $current_lang = substr( get_bloginfo ( 'language' ), 0, 2 )
                 if ( function_exists('pll_the_languages') ) {
