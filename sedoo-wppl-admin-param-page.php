@@ -1,8 +1,7 @@
 <?php 
 include 'sedoo-campaign-mainadmin.php';
-
 //////
-// THE PARAMETER ADMINISTRATION PAGE
+// THE CAMPAIGN SETTINGS ADMINISTRATION PAGE
 if( function_exists('acf_add_options_page') ) {
 	// the page
 	acf_add_options_page(array(
@@ -10,7 +9,7 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'Paramètres de campagne',
 		'menu_slug' 	=> 'sedoo-campaign-admin-page',
 		'parent_slug'	=> 'sedoo-campaign-admin-main-page',
-		'capability'	=> 'edit_posts',
+		'capability'	=> 'manage_options',
 		'redirect'		=> false
     ));
     
@@ -119,26 +118,6 @@ if( function_exists('acf_add_options_page') ) {
 				'maxlength' => '',
 			),
 			array(
-				'key' => 'field_6006f6b745489',
-				'label' => 'ID viewer par défaut',
-				'name' => 'id_viewer_defaut',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => 'hidden',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'readonly'=> 1,
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
 				'key' => 'field_6006f6b745590',
 				'label' => 'ID composant web catalogue',
 				'name' => 'id_composant_catalogue',
@@ -217,11 +196,129 @@ if( function_exists('acf_add_options_page') ) {
 		'active' => true,
 		'description' => '',
 	));
-
-
-	
 }
-// END THE PARAMETER ADMINISTRATION PAGE
+// END THE CAMPAIGN SETTINGS ADMINISTRATION PAGE
+//////
+
+
+//////
+// THE SERVICES SETTINGS ADMINISTRATION PAGE
+if( function_exists('acf_add_options_page') ) {
+	// the page
+	acf_add_options_page(array(
+		'page_title' 	=> 'Paramètres de services',
+		'menu_title'	=> 'Paramètres de services',
+		'menu_slug' 	=> 'sedoo-campaign-services-admin-page',
+		'parent_slug'	=> 'sedoo-campaign-admin-main-page',
+		'capability'	=> 'manage_options',
+		'redirect'		=> false
+    ));
+    
+	acf_add_local_field_group(array(
+		'key' => 'group_605488ae93475',
+		'title' => 'Url de services',
+		'fields' => array(
+			array(
+				'key' => 'field_6054902922fe1',
+				'label' => '',
+				'name' => '',
+				'type' => 'repeater',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'collapsed' => '',
+				'min' => 0,
+				'max' => 0,
+				'layout' => 'table',
+				'button_label' => '',
+				'sub_fields' => array(
+					array(
+						'key' => 'field_6054903222fe2',
+						'label' => 'Type de produit',
+						'name' => 'type_de_produit',
+						'type' => 'text',
+						'instructions' => 'Ex : calendarbasedproduct, filetree',
+						'required' => 1,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+						'maxlength' => '',
+					),
+					array(
+						'key' => 'field_6054904c22fe3',
+						'label' => 'URL du service',
+						'name' => 'url_du_service',
+						'type' => 'text',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+						'maxlength' => '',
+					),
+					array(
+						'key' => 'field_6054905222fe4',
+						'label' => 'URL du package',
+						'name' => 'url_du_package',
+						'type' => 'text',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'placeholder' => '',
+						'prepend' => '',
+						'append' => '',
+						'maxlength' => '',
+					),
+				),
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'options_page',
+					'operator' => '==',
+					'value' => 'sedoo-campaign-services-admin-page',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	));
+
+    
+}
+// END THE SERVICES SETTINGS ADMINISTRATION PAGE
 //////
 
 ///////
@@ -240,7 +337,7 @@ add_action('admin_enqueue_scripts', 'sedoo_campaign_include_back_css');
 add_action('admin_menu', 'sedoo_campaign_menu');
 
 function sedoo_campaign_menu() {
-    add_menu_page( 'sedoo-campaign-main-admin-page', 'Ma campagne', 'Ma campagne',
+    add_menu_page( 'sedoo-campaign-main-admin-page', 'Ma campagne', 'administrator',
      'sedoo-campaign-admin-main-page', 'sedoo_main_admin_page_func'); // in sedoo-campaign-mainadmin.php
 }
 // END THE MAIN ADMINISTRATION PAGE

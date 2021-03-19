@@ -98,7 +98,7 @@ function sedoo_campaign_createOrUpdateCampaignProduct(product, ajaxurl, i, total
             'product':product
         },
         success:function(result) {
-            jQuery("#SynchroniseProducts").text(i +'/'+ total+ ' Synchronisé(s) !');
+            jQuery("#SynchroniseProducts").text((i+1) +'/'+ total+ ' Synchronisé(s) !');
         }
     });
 }
