@@ -210,7 +210,7 @@ if( function_exists('acf_add_options_page') ) {
 		'menu_title'	=> 'Paramètres de services',
 		'menu_slug' 	=> 'sedoo-campaign-services-admin-page',
 		'parent_slug'	=> 'sedoo-campaign-admin-main-page',
-		'capability'	=> 'manage_options',
+		'capability'	=> 'manage_network',
 		'redirect'		=> false
     ));
     
