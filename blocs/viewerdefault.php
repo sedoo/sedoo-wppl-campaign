@@ -24,12 +24,6 @@ if(is_admin() == true) {
         $breadcrumb = get_field('name', $product_id[0]); // get product id and name
         $type_produit = get_field('type', $product_id[0]);
 
-        echo $breadcrumb;
-        
-        echo '----';
-        var_dump($breadcrumb);
-
-
         $campaign = get_field('nom_de_la_campagne', 'option');   
 
         // get service url and package url from option page
@@ -55,5 +49,6 @@ if(is_admin() == true) {
     ?>           
     <script src="<?php echo $package_url; ?>"></script>
     <campaign-product <?php echo $type_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb='<?php echo htmlspecialchars($breadcrumb); ?>' vce-ready="">
+    </campaign-product>
 </section> 
 <?php } ?>
