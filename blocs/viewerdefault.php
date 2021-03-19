@@ -49,6 +49,6 @@ if(is_admin() == true) {
         }
     ?>            
     <script src="<?php echo $package_url; ?>"></script>
-    <campaign-product <?php echo $attribut_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb="<?php echo $breadcrumb; ?>" vce-ready="">
+    <campaign-product <?php echo $type_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb="<?php echo $breadcrumb; ?>" vce-ready="">
 </section> 
 <?php } ?>
