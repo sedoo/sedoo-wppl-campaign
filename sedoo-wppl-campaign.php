@@ -156,12 +156,12 @@ function sedoo_campaign_update_option_meta() {
 		// register a testimonial block.
 		acf_register_block_type(array(
 			'name'              => 'sedoo_campaign_default_viewer',
-			'title'             => __('Default Viewer'),
-			'description'       => __('Ajoute un viewer par défaut'),
+			'title'             => __('Viewer de produit'),
+			'description'       => __('Ajoute un viewer de produit'),
 			'render_callback'   => 'sedoo_campaing_register_viewer_bloc_callback',
 			'category'          => 'widgets',
 			'icon'              => 'admin-site-alt2',
-			'keywords'          => array( 'viewers', 'sedoo' ),
+			'keywords'          => array( 'viewers', 'produit', 'sedoo' ),
 		));
 	}
 
@@ -177,29 +177,6 @@ function sedoo_campaign_update_option_meta() {
 		'key' => 'group_5f846daf38429',
 		'title' => 'Champs pour bloc misva',
 		'fields' => array(
-			array(
-				'key' => 'field_5f846db6e9d25',
-				'label' => 'Type de viewer à charger',
-				'name' => 'type_de_viewer_a_charger',
-				'type' => 'relationship',
-				'instructions' => 'Incluez un viewer spécifique aux données qui seront traitées et affichées.',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'post_type' => array(
-					0 => 'sedoo_camp_viewers',
-				),
-				'taxonomy' => '',
-				'filters' => '',
-				'elements' => '',
-				'min' => '0',
-				'max' => '1',
-				'return_format' => 'id',
-			),
 			array(
 				'key' => 'field_5f858dbfb1014',
 				'label' => 'Produits à afficher',

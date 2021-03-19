@@ -1,5 +1,4 @@
 <?php 
-
 ///////
 // CREATE THE PRODUCT MENU
 function sedoo_campaign_init_product_menu() {
@@ -149,48 +148,6 @@ function sedoo_campaign_init_create_catalogue() {
 add_action( 'init', 'sedoo_campaign_init_create_catalogue', 0 );
 // END CREATE THE CATALOGUE WEB COMPONENT
 ///////
-
-
-///////
-// CREATE THE DEFAULT VIEWER
-function sedoo_campaign_init_create_viewers() {
-	if(!get_field('id_viewer_defaut', 'option')) {
-		$defaultviewers_args = array(
-			'post_title'    => wp_strip_all_tags( 'Viewer par défaut' ),
-			'post_name'		=> 'default-viewer',
-			'post_status'   => 'publish',
-			'post_type'		=> 'sedoo_camp_viewers',
-			'post_author'   => 1
-		);
-	
-		$defautviewer_Id = wp_insert_post( $defaultviewers_args );
-		update_field( 'id_viewer_defaut', $defautviewer_Id, 'option' ); // update campaign option
-
-		$scripts_values = array(
-			array(
-				"script_misva"   => '<script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sedoo/snapshot/misva-components/0.0.1-snapshot"></script>'
-            )
-		);
-		update_field( 'elements_inclus_misva', $scripts_values, $defautviewer_Id ); // update viewer scripts
-
-
-
-		$params_values = array(
-			array(
-				"nom_de_lattribut"   => 'service',
-				"valeur_de_lattribut" => 'https://services.aeris-data.fr/campaigns/data/v1_0'
-			)
-		);
-		update_field( 'repeteur_attributs_misva', $params_values, $defautviewer_Id ); // update viewer scripts
-		update_field( 'nom_de_la_balise', 'campaign-product', $defautviewer_Id ); // update viewer div
-
-		update_field( 'field_600976ee6a445', $name, $sedoo_campaign_product_id);
-	}
-}
-add_action( 'init', 'sedoo_campaign_init_create_viewers', 0 );
-// END CREATE THE DEFAULT VIEWER
-///////
-
 
 ///////
 // DETECT IF USER TRIED TO DELETE A POST THAT IS USED IN CAMPAIGN (JUST SHOW MESSAGE HERE)

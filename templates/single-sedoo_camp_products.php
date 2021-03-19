@@ -25,27 +25,32 @@ get_header();
                         <?php 
                             $product = get_field('id'); // get product id and name
                             $breadcrumb = get_field('name'); // get product id and name
+                            $type_produit = get_field('type');
+
                             $campaign = get_field('nom_de_la_campagne', 'option');   
 
+                            // get service url and package url from option page
+                            while( have_rows('field_6054902922fe1', 'option') ) : the_row();
+                            if(get_sub_field('type_de_produit') == $type_produit) {
+                                $service_url = get_sub_field('url_du_service');
+                                $package_url = get_sub_field('url_du_package');
+                            }
+                            endwhile;
+
                             // selection du type de viewer
-                            $type_viewer = get_field('type');
-                            $attribut_viewer = '';
-                            switch ($type_viewer) {
+                            $type_viewer = '';
+                            switch ($type_produit) {
                                 case 'calendarbasedproduct':
                                     break;
                                 case 'filetree':
-                                    $attribut_viewer= 'viewer="tree"';
+                                    $type_viewer= 'viewer="tree"';
                                     break;
-                                case 'wmts':
-                                    $attribut_viewer= 'viewer="wmts"';
-                                //     $serviceURL ======
+                                case 'wmsproduct':
+                                    $type_viewer= 'viewer="wmts"';
                                     break;
-    
-
-
                             }
                         ?>
-                        <campaign-product <?php echo $attribut_viewer; ?> service="https://services.aeris-data.fr/campaigns/data/v1_0" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb="<?php echo $breadcrumb; ?>" vce-ready="">
+                        <campaign-product <?php echo $attribut_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb="<?php echo $breadcrumb; ?>" vce-ready="">
                     </section> 
 				</article>
 			</div>

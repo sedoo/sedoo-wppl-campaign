@@ -1,7 +1,6 @@
 <?php
 // /products page
 get_header();
-
 ?>
 
 <div id="content" class="site-content">
