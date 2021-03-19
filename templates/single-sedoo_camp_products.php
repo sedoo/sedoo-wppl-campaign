@@ -7,9 +7,6 @@ get_header();
 <div id="content" class="site-content">
 	<div id="primary" class="content-area wrapper product_left_menu tocActive">
 		<aside>
-            <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
             <script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
             <?php 
                 $product_nav_menu_id = get_field('main-products-campain-menu', 'option');
@@ -26,8 +23,8 @@ get_header();
                     ?>
                     <section class="sedoo-campaign-view-product">
                         <?php 
-                            $product = get_field('id');
-                            $breadcrumb = get_field('id');
+                            $product = get_field('id'); // get product id and name
+                            $breadcrumb = get_field('name'); // get product id and name
                             $campaign = get_field('nom_de_la_campagne', 'option');   
 
                             // selection du type de viewer
@@ -39,6 +36,13 @@ get_header();
                                 case 'filetree':
                                     $attribut_viewer= 'viewer="tree"';
                                     break;
+                                case 'wmts':
+                                    $attribut_viewer= 'viewer="wmts"';
+                                //     $serviceURL ======
+                                    break;
+    
+
+
                             }
                         ?>
                         <campaign-product <?php echo $attribut_viewer; ?> service="https://services.aeris-data.fr/campaigns/data/v1_0" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb="<?php echo $breadcrumb; ?>" vce-ready="">
