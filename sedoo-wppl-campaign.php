@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sedoo - Campagnes
  * Description: Plugin nécessaire sur un wordpress type campagne
- * Version: 0.1.9
+ * Version: 0.2.0
  * Author: Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
@@ -204,7 +204,7 @@ function sedoo_campaign_update_option_meta() {
 				'key' => 'field_5f858dbfb1014',
 				'label' => 'Produits à afficher',
 				'name' => 'produits_a_afficher',
-				'type' => 'select',
+				'type' => 'relationship',
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => 0,
@@ -213,16 +213,15 @@ function sedoo_campaign_update_option_meta() {
 					'class' => '',
 					'id' => '',
 				),
-				'choices' => array(
+				'post_type' => array(
+					0 => 'sedoo_camp_products',
 				),
-				'default_value' => array(
-				),
-				'allow_null' => 0,
-				'multiple' => 1,
-				'ui' => 1,
-				'ajax' => 0,
-				'return_format' => 'array',
-				'placeholder' => '',
+				'taxonomy' => '',
+				'filters' => '',
+				'elements' => '',
+				'min' => '0',
+				'max' => '1',
+				'return_format' => 'id',
 			),
 		),
 		'location' => array(
