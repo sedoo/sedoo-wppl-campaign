@@ -16,11 +16,6 @@ get_header();
 		<main id="main" class="site-main">
 			<div class="wrapper-content">
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> 
-                    <?php 
-                        while ( have_posts() ) : the_post();
-                           echo the_content();
-                        endwhile;
-                    ?>
                     <section class="sedoo-campaign-view-product">
                         <?php 
                             $product = get_field('id'); // get product id and name
@@ -50,6 +45,22 @@ get_header();
                                     break;
                             }
                         ?>
+                        <h1> <?php echo get_the_title(); ?> </h1>
+                        <?php 
+                        $product_content = get_the_content();
+                        if(!empty($product_content)) { ?>
+                            <nav class="users-tabs" role="tablist">
+                                <section id="product_description_section">
+                                <input type="checkbox" name="tabs" id="product_description" />
+                                <label for="product_description" id="product_descriptionTab" role="tab" aria-controls="product_descriptionpanel">Details</label>
+                                <article id="product_descriptionpanel" role="tabpanel" aria-labelledby="product_descriptionTab">
+                                    <div>
+                                        <?php echo $product_content; ?>
+                                    </div>
+                                </article>
+                                </section>
+                            </nav> 
+                        <?php } ?>
                         <campaign-product <?php echo $type_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb='<?php echo $breadcrumb; ?>' vce-ready="">
                         </campaign-product>
                     </section> 
