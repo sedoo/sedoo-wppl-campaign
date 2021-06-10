@@ -238,67 +238,67 @@ function sedoo_campaign_single_product_load_template( $single_template ) {
 }
 
 	// SINGLE PRODUCT FIELDS
-	acf_add_local_field_group(array(
-		'key' => 'group_60c21d19d8896',
-		'title' => 'Informations',
-		'fields' => array(
-			array(
-				'key' => 'field_60c21d3e5ddfc',
-				'label' => 'Label \'informations\'',
-				'name' => 'sedoo_campaign_product_label_informations',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_60c21d1edc109',
-				'label' => 'Informations',
-				'name' => 'sedoo_campaign_product_information',
-				'type' => 'wysiwyg',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'tabs' => 'all',
-				'toolbar' => 'full',
-				'media_upload' => 1,
-				'delay' => 0,
-			),
-		),
-		'location' => array(
-			array(
-				array(
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'sedoo_camp_products',
-				),
-			),
-		),
-		'menu_order' => 0,
-		'position' => 'normal',
-		'style' => 'default',
-		'label_placement' => 'top',
-		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
-		'active' => true,
-		'description' => '',
-	));
+	// acf_add_local_field_group(array(
+	// 	'key' => 'group_60c21d19d8896',
+	// 	'title' => 'Informations',
+	// 	'fields' => array(
+	// 		array(
+	// 			'key' => 'field_60c21d3e5ddfc',
+	// 			'label' => 'Label \'informations\'',
+	// 			'name' => 'sedoo_campaign_product_label_informations',
+	// 			'type' => 'text',
+	// 			'instructions' => '',
+	// 			'required' => 0,
+	// 			'conditional_logic' => 0,
+	// 			'wrapper' => array(
+	// 				'width' => '',
+	// 				'class' => '',
+	// 				'id' => '',
+	// 			),
+	// 			'default_value' => 'Details',
+	// 			'placeholder' => '',
+	// 			'prepend' => '',
+	// 			'append' => '',
+	// 			'maxlength' => '',
+	// 		),
+	// 		array(
+	// 			'key' => 'field_60c21d1edc109',
+	// 			'label' => 'Informations',
+	// 			'name' => 'sedoo_campaign_product_information',
+	// 			'type' => 'wysiwyg',
+	// 			'instructions' => '',
+	// 			'required' => 0,
+	// 			'conditional_logic' => 0,
+	// 			'wrapper' => array(
+	// 				'width' => '',
+	// 				'class' => '',
+	// 				'id' => '',
+	// 			),
+	// 			'default_value' => '',
+	// 			'tabs' => 'all',
+	// 			'toolbar' => 'full',
+	// 			'media_upload' => 1,
+	// 			'delay' => 0,
+	// 		),
+	// 	),
+	// 	'location' => array(
+	// 		array(
+	// 			array(
+	// 				'param' => 'post_type',
+	// 				'operator' => '==',
+	// 				'value' => 'sedoo_camp_products',
+	// 			),
+	// 		),
+	// 	),
+	// 	'menu_order' => 0,
+	// 	'position' => 'normal',
+	// 	'style' => 'default',
+	// 	'label_placement' => 'top',
+	// 	'instruction_placement' => 'label',
+	// 	'hide_on_screen' => '',
+	// 	'active' => true,
+	// 	'description' => '',
+	// ));
 		
 	// END SINGLE PRODUCT FIELDS
 
