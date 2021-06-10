@@ -52,7 +52,7 @@ get_header();
                             <nav class="users-tabs" role="tablist">
                                 <section id="product_description_section">
                                 <input type="checkbox" name="tabs" id="product_description" />
-                                <label for="product_description" id="product_descriptionTab" role="tab" aria-controls="product_descriptionpanel">Details</label>
+                                <label for="product_description" id="product_descriptionTab" role="tab" aria-controls="product_descriptionpanel">Legend</label>
                                 <article id="product_descriptionpanel" role="tabpanel" aria-labelledby="product_descriptionTab">
                                     <div>
                                         <?php echo $product_content; ?>
