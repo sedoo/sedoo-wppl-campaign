@@ -46,21 +46,39 @@ get_header();
                             }
                         ?>
                         <h1> <?php echo get_the_title(); ?> </h1>
+                        <nav class="users-tabs" role="tablist">
                         <?php 
                         $product_content = get_the_content();
-                        if(!empty($product_content)) { ?>
-                            <nav class="users-tabs" role="tablist">
-                                <section id="product_description_section">
-                                <input type="checkbox" name="tabs" id="product_description" />
-                                <label for="product_description" id="product_descriptionTab" role="tab" aria-controls="product_descriptionpanel">Details</label>
-                                <article id="product_descriptionpanel" role="tabpanel" aria-labelledby="product_descriptionTab">
-                                    <div>
-                                        <?php echo $product_content; ?>
-                                    </div>
-                                </article>
+                            if(!empty($product_content)) { ?>
+                                    <section id="product_description_section">
+                                        <input type="checkbox" name="tabs" id="product_description" />
+                                        <label for="product_description" id="product_descriptionTab" role="tab" aria-controls="product_descriptionpanel">Legend</label>
+                                        <article id="product_descriptionpanel" role="tabpanel" aria-labelledby="product_descriptionTab">
+                                            <div>
+                                                <?php echo $product_content; ?>
+                                            </div>
+                                        </article>
+                                    </section>
+                            <?php } ?>
+                            <?php if(get_field('sedoo_campaign_product_information', get_the_ID())) { ?>
+                                <section id="product_details_section">
+                                    <input type="checkbox" name="tabs" id="product_details" />
+                                    <label for="product_details" id="product_detailsTab" role="tab" aria-controls="product_detailspanel">
+                                        <?php if(get_field('sedoo_campaign_product_label_informations', get_the_ID())) {
+                                            echo get_field('sedoo_campaign_product_label_informations', get_the_ID());
+                                        } else {
+                                            echo 'Details';
+                                        }
+                                        ?>
+                                    </label>
+                                    <article id="product_detailspanel" role="tabpanel" aria-labelledby="product_detailsTab">
+                                        <div>
+                                            <?php echo get_field('sedoo_campaign_product_information', get_the_ID()); ?>
+                                        </div>
+                                    </article>
                                 </section>
-                            </nav> 
-                        <?php } ?>
+                            <?php } ?>
+                        </nav> 
                         <campaign-product <?php echo $type_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb='<?php echo $breadcrumb; ?>' vce-ready="">
                         </campaign-product>
                     </section> 
