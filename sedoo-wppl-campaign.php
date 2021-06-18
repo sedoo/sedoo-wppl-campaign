@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sedoo - Campagnes
  * Description: Plugin nécessaire sur un wordpress type campagne
- * Version: 0.2.10
+ * Version: 0.2.11
  * Author: Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
@@ -333,3 +333,12 @@ function sedoo_campaign_single_product_load_css() {
 }
 // END INCLUDE FRONT CSS
 //////
+
+
+/**/
+// Adding Dashicons in WordPress Front-end
+/**/
+add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
+function load_dashicons_front_end() {
+  wp_enqueue_style( 'dashicons' );
+}
