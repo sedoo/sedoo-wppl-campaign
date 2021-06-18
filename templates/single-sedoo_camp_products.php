@@ -3,7 +3,6 @@
 get_header();
 ?>
 
-
 <div id="content" class="site-content">
 	<div id="primary" class="content-area wrapper product_left_menu tocActive">
 		<aside>
@@ -11,6 +10,7 @@ get_header();
             <?php 
                 $product_nav_menu_id = get_field('main-products-campain-menu', 'option');
             ?>
+            <span id="button_fold_menu" class="dashicons dashicons-arrow-left-alt2"></span>
             <campaign-product-tree menu_api_url="<?php echo home_url(); ?>/wp-json/menus/v1/menus/<?php echo $product_nav_menu_id; ?>"></campaign-product-tree>
 		</aside>
 		<main id="main" class="site-main">
@@ -90,6 +90,11 @@ get_header();
 	<!-- #primary -->
 </div>
 
+<script>
+jQuery('#button_fold_menu').click(function(){
+    jQuery('#primary>aside').toggleClass('treemenufolded');
+});
+</script>
 <?php 
 get_footer();
 ?>

@@ -68,3 +68,54 @@ margin-bottom:10px;
 display:block;
 }
 
+/************ THE PRODUCT TREE MENU *******/
+#primary>aside {
+    max-width:524px;
+    width:100%;
+    position: relative;
+    -webkit-transition: all 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    -o-transition: all 400ms ease;
+    transition: all 400ms ease;
+    min-width:150px;
+}
+#primary>aside.treemenufolded{
+    width:10%;
+    -webkit-transition: all 400ms ease;
+    -moz-transition: all 400ms ease;
+    -ms-transition: all 400ms ease;
+    -o-transition: all 400ms ease;
+    transition: all 400ms ease;
+    min-width:150px;
+}
+
+#primary>aside.treemenufolded #button_fold_menu {
+    transform:rotateZ(180deg);
+    -webkit-transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+    transition: all 900ms ease;
+}
+
+#button_fold_menu {
+    transform:rotateZ(0deg);
+    -webkit-transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+    transition: all 900ms ease;
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+    background: #0d4882;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    top: 32px;
+    cursor: pointer;
+    color: white;
+}
