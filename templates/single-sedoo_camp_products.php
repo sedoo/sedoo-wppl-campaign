@@ -43,6 +43,9 @@ get_header();
                                 case 'wmsproduct':
                                     $type_viewer= 'viewer="wmts"';
                                     break;
+                                case 'iframeproduct':
+                                    $type_viewer= 'viewer="iframe"';
+                                    break;
                             }
                         ?>
                         <h1> <?php echo get_the_title(); ?> </h1>
