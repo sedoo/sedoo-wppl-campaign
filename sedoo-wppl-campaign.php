@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Sedoo - Campagnes
- * Description: Plugin nécessaire sur un wordpress type campagne
- * Version: 0.3.0
- * Author: Nicolas Gruwe 
+ * Plugin Name: Sedoo - Campaign product viewer
+ * Description: Déclarer une campagne, ses produits et les viewers associés
+ * Version: 0.4.0
+ * Author: Pierre Vert & Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
  */
