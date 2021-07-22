@@ -49,6 +49,9 @@ get_header();
                             }
                         ?>
                         <h1> <?php echo get_the_title(); ?> </h1>
+                        <?php
+                        if ( ! post_password_required() ) {
+                        ?>
                         <nav class="users-tabs" role="tablist">
                         <?php 
                         $product_content = get_the_content();
@@ -83,11 +86,13 @@ get_header();
                             <?php } ?>
                         </nav> 
                         <?php
-                        if ( ! post_password_required() ) {
+                        // if ( ! post_password_required() ) {
                         ?>
                         <campaign-product <?php echo $type_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb='<?php echo $breadcrumb; ?>' vce-ready="">
                         </campaign-product>
                         <?php
+                        } else {
+                            the_content();
                         }
                         ?>
                     </section> 
