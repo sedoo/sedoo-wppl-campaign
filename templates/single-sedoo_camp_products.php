@@ -16,9 +16,6 @@ get_header();
 		<main id="main" class="site-main">
 			<div class="wrapper-content">
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>> 
-                <?php
-                if ( ! post_password_required() ) {
-					?>
                     <section class="sedoo-campaign-view-product">
                         <?php 
                             $product = get_field('id'); // get product id and name
@@ -85,12 +82,15 @@ get_header();
                                 </section>
                             <?php } ?>
                         </nav> 
+                        <?php
+                        if ( ! post_password_required() ) {
+                        ?>
                         <campaign-product <?php echo $type_viewer; ?> service="<?php echo $service_url; ?>" campaign="<?php echo $campaign; ?>" product="<?php echo $product; ?>" breadcrumb='<?php echo $breadcrumb; ?>' vce-ready="">
                         </campaign-product>
+                        <?php
+                        }
+                        ?>
                     </section> 
-                    <?php
-					}
-					?>
 				</article>
 			</div>
 		</main>
