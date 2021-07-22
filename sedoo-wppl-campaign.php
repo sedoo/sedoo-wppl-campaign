@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sedoo - Campaign product viewer
  * Description: Déclarer une campagne, ses produits et les viewers associés
- * Version: 0.4.0
+ * Version: 0.4.1
  * Author: Pierre Vert & Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
