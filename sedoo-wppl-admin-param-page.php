@@ -204,13 +204,17 @@ if( function_exists('acf_add_options_page') ) {
 //////
 // THE SERVICES SETTINGS ADMINISTRATION PAGE
 if( function_exists('acf_add_options_page') ) {
+	// check if multisite instance for capabilities
+	if ( is_multisite() ) 
+		{ $capability = 'manage_network'; } else { $capability = 'update_core'; }
+
 	// the page
 	acf_add_options_page(array(
 		'page_title' 	=> 'Paramètres de services',
 		'menu_title'	=> 'Paramètres de services',
 		'menu_slug' 	=> 'sedoo-campaign-services-admin-page',
 		'parent_slug'	=> 'sedoo-campaign-admin-main-page',
-		'capability'	=> 'manage_network',
+		'capability'	=> $capability,
 		'redirect'		=> false
     ));
     
