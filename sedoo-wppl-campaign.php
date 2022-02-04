@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Sedoo - Campaign product viewer
  * Description: Déclarer une campagne, ses produits et les viewers associés
- * Version: 0.4.2
+ * Version: 1.0.0
  * Author: Pierre Vert & Nicolas Gruwe 
  * GitHub Plugin URI: sedoo/sedoo-wppl-campaign
  * GitHub Branch:     master
@@ -12,6 +12,7 @@ include 'sedoo-wppl-posttypes.php'; // post types viewers & product
 include 'sedoo-wppl-campaign-func.php'; // post types viewers & product
 include 'sedoo-wppl-admin-param-page.php'; // admin parameters page
 include 'inc/sedoo-wppl-campaign-menu-json.php';
+include 'inc/sedoo-wppl-campaign-acf-fields.php';
 
 ///////
 // CREATE OR UPDATE A PRODUCT
@@ -137,8 +138,6 @@ function sedoo_campaign_update_option_meta() {
 // END UPDATE GLOBAL META FOR JS AJAX CALL
 ///////
 
-
-
 ///////
 // REGISTER DEFAULT VIEWER BLOC
 	function sedoo_campaing_register_viewer_bloc_callback( $block ) {
@@ -170,55 +169,7 @@ function sedoo_campaign_update_option_meta() {
 		add_action('acf/init', 'sedoo_campaing_register_viewer_bloc');
 	}
 
-	////////
-	// CHAMPS ACF DU BLOC DEFAULT VIEWERS
-	///////
-	acf_add_local_field_group(array(
-		'key' => 'group_5f846daf38429',
-		'title' => 'Champs pour bloc misva',
-		'fields' => array(
-			array(
-				'key' => 'field_5f858dbfb1014',
-				'label' => 'Produits à afficher',
-				'name' => 'produits_a_afficher',
-				'type' => 'relationship',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'post_type' => array(
-					0 => 'sedoo_camp_products',
-				),
-				'taxonomy' => '',
-				'filters' => '',
-				'elements' => '',
-				'min' => '0',
-				'max' => '1',
-				'return_format' => 'id',
-			),
-		),
-		'location' => array(
-			array(
-				array(
-					'param' => 'block',
-					'operator' => '==',
-					'value' => 'acf/sedoo-campaign-default-viewer',
-				),
-			),
-		),
-		'menu_order' => 0,
-		'position' => 'normal',
-		'style' => 'default',
-		'label_placement' => 'top',
-		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
-		'active' => true,
-		'description' => '',
-	));
+
 // END REGISTER DEFAULT VIEWER BLOC
 ///////
 
@@ -236,71 +187,6 @@ function sedoo_campaign_single_product_load_template( $single_template ) {
  
     return $single_template;
 }
-
-	// SINGLE PRODUCT FIELDS
-	acf_add_local_field_group(array(
-		'key' => 'group_60c21d19d8896',
-		'title' => 'Informations',
-		'fields' => array(
-			array(
-				'key' => 'field_60c21d3e5ddfc',
-				'label' => 'Label \'informations\'',
-				'name' => 'sedoo_campaign_product_label_informations',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => 'Details',
-				'placeholder' => '',
-				'prepend' => '',
-				'append' => '',
-				'maxlength' => '',
-			),
-			array(
-				'key' => 'field_60c21d1edc109',
-				'label' => 'Informations',
-				'name' => 'sedoo_campaign_product_information',
-				'type' => 'wysiwyg',
-				'instructions' => '',
-				'required' => 0,
-				'conditional_logic' => 0,
-				'wrapper' => array(
-					'width' => '',
-					'class' => '',
-					'id' => '',
-				),
-				'default_value' => '',
-				'tabs' => 'all',
-				'toolbar' => 'full',
-				'media_upload' => 1,
-				'delay' => 0,
-			),
-		),
-		'location' => array(
-			array(
-				array(
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'sedoo_camp_products',
-				),
-			),
-		),
-		'menu_order' => 0,
-		'position' => 'normal',
-		'style' => 'default',
-		'label_placement' => 'top',
-		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
-		'active' => true,
-		'description' => '',
-	));
-		
-	// END SINGLE PRODUCT FIELDS
 
 // END SINGLE PRODUCT PAGE
 //////

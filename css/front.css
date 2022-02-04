@@ -21,52 +21,69 @@
 
 
 /*************    TABS    **************/
-.users-tabs [type="checkbox"] {
-    display: none;
-    padding: 20px;
+.tabs {
+    list-style-type:none;
+    position:relative;
+    max-width:1200px;
+    overflow: hidden;
 }
 
-.users-tabs {
-list-style-type:none;
-position:relative;
-max-width:1200px;
+.tabs nav[role="tablist"] {
+    border-bottom:1px solid #EEE;
 }
 
-.users-tabs label {
-display:block;
-padding:5px 20px;
-border-radius:5px;
-background:#eee;
-margin-top:5px;
-cursor:pointer; /* changement de curseur de souris */
-}
-.darkmode .users-tabs label {
-color:#333;
+.tabs nav[role="tablist"]::after {
+
 }
 
-[type="checkbox"]:checked + label {
-border-radius:5px 5px 0 0;
+.tabs nav[role="tablist"] button[role="tab"] {
+    padding:5px 20px;
+    margin-top:5px;
+    cursor:pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    animation-name: border_slide_in_left;
+    animation-duration: 0.7s;
+    animation-timing-function: linear;
+    /* animation-delay: 0s; */
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
+    transition: border-bottom 0.2s ease-in-out;
 }
 
-.users-tabs label:hover,
-.users-tabs [type="checkbox"]:checked + label {
-color:#999;
+.tabs nav[role="tablist"] button[aria-selected="true"] {
+    border-bottom:2px solid var(--theme-color);
+    
+} 
+
+.tabs nav[role="tablist"] button:hover {
+    background:#DDD;
+    border-bottom:2px solid var(--theme-color);
+} 
+
+.tabs > section {
+    animation-name: slide_in_left;
+    animation-duration: 0.4s;
+    animation-timing-function: linear;
+    /* animation-delay: 0s; */
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-play-state: running;
 }
 
-.users-tabs article,
-.user-page .users-tabs [type="checkbox"] {
-display:none;
-padding:20px;
-}
-
-.users-tabs article {
-border-radius:0 0 5px 5px;
-margin-bottom:10px;
-}
-
-.users-tabs [type="checkbox"]:checked ~ article {
-display:block;
-}
+/* @keyframes border_slide_in_left {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        opacity:1;
+        transform: translateX(0);
+    }
+  } */
 
 /************ THE PRODUCT TREE MENU *******/
 #primary>aside {
