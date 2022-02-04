@@ -1,6 +1,6 @@
 <?php 
 ///////
-// CREATE THE PRODUCT POST TYPE AND HIS FIELDS ACF
+// CREATE THE PRODUCT POST TYPE
 // Register Custom Post Type
 	function sedoo_campaign_register_product_post_type() {
 
@@ -37,7 +37,7 @@
 			'label'                 => __( 'Produit', 'text_domain' ),
 			'description'           => __( 'Produits de campagnes', 'text_domain' ),
 			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor' ),
+			'supports'              => array( 'title', 'editor', 'revisions' ),
 			'taxonomies'            => array( 'category', 'post_tag' ),
 			'hierarchical'          => false,
 			'public'                => true,
@@ -59,93 +59,8 @@
 	}
 	add_action( 'init', 'sedoo_campaign_register_product_post_type', 0 );
 
-	// register field for products
-	if( function_exists('acf_add_local_field_group') ):
-		acf_add_local_field_group(array(
-			'key' => 'group_600976e621bfa',
-			'title' => 'Groupe de champs d\'un produit de campagne',
-			'fields' => array(
-				array(
-					'key' => 'field_600976ee6a445',
-					'label' => 'name',
-					'name' => 'name',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => '',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'readonly' => 1,
-					'append' => '',
-					'maxlength' => '',
-				),
-				array(
-					'key' => 'field_600979ee6a655',
-					'label' => 'Type',
-					'name' => 'type',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => '',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'readonly' => 1,
-					'append' => '',
-					'maxlength' => '',
-				),
-				array(
-					'key' => 'field_600977076a446',
-					'label' => 'id',
-					'name' => 'id',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => '',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'append' => '',
-					'readonly' => 1,
-					'maxlength' => '',
-				)
-			),
-			'location' => array(
-				array(
-					array(
-						'param' => 'post_type',
-						'operator' => '==',
-						'value' => 'sedoo_camp_products',
-					),
-				),
-			),
-			'menu_order' => 2,
-			'position' => 'normal',
-			'style' => 'default',
-			'label_placement' => 'top',
-			'instruction_placement' => 'label',
-			'hide_on_screen' => '',
-			'active' => true,
-			'description' => '',
-		));
-	endif;
-// END CREATE THE PRODUCT POST TYPE AND FIELDS
+	
+// END CREATE THE PRODUCT POST TYPE
 ///////
 
 ?>
