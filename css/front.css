@@ -29,7 +29,7 @@
 }
 
 .tabs nav[role="tablist"] {
-    /* border-bottom:1px solid #CCC; */
+    border-bottom:1px solid #EEE;
 }
 
 .tabs nav[role="tablist"]::after {
@@ -41,6 +41,7 @@
     margin-top:5px;
     cursor:pointer;
     font-size: 0.875rem;
+    font-weight: 600;
     animation-name: border_slide_in_left;
     animation-duration: 0.7s;
     animation-timing-function: linear;
