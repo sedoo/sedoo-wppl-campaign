@@ -52,7 +52,7 @@ function sedoo_main_admin_page_func() { // campaign main page?>
                 <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
-                <script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
+                <script src="https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
                 <input-product-management campaign="<?php echo $nom_de_campagne; ?>"></input-product-management>
             </div>
         </div>

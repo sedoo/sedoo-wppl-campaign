@@ -120,7 +120,7 @@ function sedoo_campaign_init_create_catalogue() {
 			array("script"   => '<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js">/script>'),
 			array("script"   => '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>'),
 			array("script"   => '<script>  document.ssoAerisInitOptions = {url : "https://sso.aeris-data.fr/auth",     realm : "aeris",     clientId : "$$CAMPAIGNNAME$$-vjs",     resource: "catalogue-aeris-services",  authorizedDomains: ["https://services.aeris-data.fr/"]    } </script>'),
-			array("script"   => '<script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sedoo/snapshot/aeris-catalogue-component/0.1.0-snapshot"></script>')
+			array("script"   => '<script src="https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sedoo/snapshot/aeris-catalogue-component/0.1.0-snapshot"></script>')
 		);
 		update_field( 'elements_inclus', $scripts_values, $catalogue_component_Id ); // update viewer scripts
 
