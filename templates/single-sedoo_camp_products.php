@@ -7,7 +7,7 @@ $product_content = get_the_content();
 <div id="content" class="site-content">
 	<div id="primary" class="content-area wrapper product_left_menu tocActive">
 		<aside>
-            <script src="https://services.aeris-data.fr/cdn/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
+            <script src="https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/sedoocampaigns/0.1.0"></script>
             <?php 
                 $product_nav_menu_id = get_field('main-products-campain-menu', 'option');
             ?>
