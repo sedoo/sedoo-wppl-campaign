@@ -1,13 +1,13 @@
-.single-sedoo_camp_products .row{
-    margin:auto;
+.single-sedoo_camp_products .row {
+  margin: auto;
 }
 
 .single-sedoo_camp_products .wrapper-content {
-    max-width: none;
+  max-width: none;
 }
 
 .v-treeview-node__root {
-    min-height: 25px !important;
+  min-height: 25px !important;
 }
 
 .v-treeview-node__level {
@@ -15,124 +15,104 @@
 }
 
 .product-viewer-title {
-    display: none;
+  display: none;
 }
-
-
 
 /*************    TABS    **************/
 .tabs {
-    list-style-type:none;
-    position:relative;
-    max-width:1200px;
-    overflow: hidden;
+  list-style-type: none;
+  position: relative;
+  max-width: 1200px;
+  overflow: hidden;
 }
 
 .tabs nav[role="tablist"] {
-    border-bottom:1px solid #EEE;
-}
-
-.tabs nav[role="tablist"]::after {
-
+  border-bottom: 1px solid #eee;
 }
 
 .tabs nav[role="tablist"] button[role="tab"] {
-    padding:5px 20px;
-    margin-top:5px;
-    cursor:pointer;
-    font-size: 0.875rem;
-    font-weight: 600;
-    animation-name: border_slide_in_left;
-    animation-duration: 0.7s;
-    animation-timing-function: linear;
-    /* animation-delay: 0s; */
-    animation-iteration-count: 1;
-    animation-direction: alternate;
-    animation-fill-mode: none;
-    animation-play-state: running;
-    transition: border-bottom 0.2s ease-in-out;
+  padding: 5px 20px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  animation-name: border_slide_in_left;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  transition: border-bottom 0.2s ease-in-out;
 }
 
 .tabs nav[role="tablist"] button[aria-selected="true"] {
-    border-bottom:2px solid var(--theme-color);
-    
-} 
+  border-bottom: 2px solid var(--theme-color);
+}
 
 .tabs nav[role="tablist"] button:hover {
-    background:#DDD;
-    border-bottom:2px solid var(--theme-color);
-} 
+  background: #ddd;
+  border-bottom: 2px solid var(--theme-color);
+}
 
 .tabs > section {
-    animation-name: slide_in_left;
-    animation-duration: 0.4s;
-    animation-timing-function: linear;
-    /* animation-delay: 0s; */
-    animation-iteration-count: 1;
-    animation-direction: alternate;
-    animation-fill-mode: none;
-    animation-play-state: running;
+  animation-name: slide_in_left;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-fill-mode: none;
+  animation-play-state: running;
 }
-
-/* @keyframes border_slide_in_left {
-    from {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    to {
-        opacity:1;
-        transform: translateX(0);
-    }
-  } */
 
 /************ THE PRODUCT TREE MENU *******/
-#primary>aside {
-    max-width:524px;
-    width:100%;
-    position: relative;
-    -webkit-transition: all 400ms ease;
-    -moz-transition: all 400ms ease;
-    -ms-transition: all 400ms ease;
-    -o-transition: all 400ms ease;
-    transition: all 400ms ease;
-    min-width:150px;
+#primary > aside {
+  max-width: 524px;
+  width: 100%;
+  position: relative;
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -ms-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  transition: all 400ms ease;
+  min-width: 150px;
 }
-#primary>aside.treemenufolded{
-    width:10%;
-    -webkit-transition: all 400ms ease;
-    -moz-transition: all 400ms ease;
-    -ms-transition: all 400ms ease;
-    -o-transition: all 400ms ease;
-    transition: all 400ms ease;
-    min-width:150px;
+#primary > aside.treemenufolded {
+  width: 10%;
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -ms-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  transition: all 400ms ease;
+  min-width: 150px;
 }
 
-#primary>aside.treemenufolded #button_fold_menu {
-    transform:rotateZ(180deg);
-    -webkit-transition: all 900ms ease;
-    -moz-transition: all 900ms ease;
-    -ms-transition: all 900ms ease;
-    -o-transition: all 900ms ease;
-    transition: all 900ms ease;
+#primary > aside.treemenufolded #button_fold_menu {
+  transform: rotateZ(180deg);
+  -webkit-transition: all 900ms ease;
+  -moz-transition: all 900ms ease;
+  -ms-transition: all 900ms ease;
+  -o-transition: all 900ms ease;
+  transition: all 900ms ease;
 }
 
 #button_fold_menu {
-    transform:rotateZ(0deg);
-    -webkit-transition: all 900ms ease;
-    -moz-transition: all 900ms ease;
-    -ms-transition: all 900ms ease;
-    -o-transition: all 900ms ease;
-    transition: all 900ms ease;
-    position: absolute;
-    z-index: 2;
-    right: 0px;
-    background: #0d4882;
-    text-align: center;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    top: 32px;
-    cursor: pointer;
-    color: white;
+  transform: rotateZ(0deg);
+  -webkit-transition: all 900ms ease;
+  -moz-transition: all 900ms ease;
+  -ms-transition: all 900ms ease;
+  -o-transition: all 900ms ease;
+  transition: all 900ms ease;
+  position: absolute;
+  z-index: 2;
+  right: 0px;
+  background: #0d4882;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  top: 32px;
+  cursor: pointer;
+  color: white;
 }

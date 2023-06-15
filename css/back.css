@@ -1,73 +1,21 @@
 .sedoo_admin_bloc {
-    background:white;
-    padding:10px;
-    padding-left:25px;
-    border:1px solid wheat;
-    border-radius: 10px;
-    margin-top:10px;
+  margin-left: -20px;
 }
 
-.green {
-    color: #37991b;
+.sedoo_admin_bloc .theme--light.v-application {
+  background: transparent;
 }
 
-
-
-/* tabs on admin page */
-.tabbed {
-    margin-top: 8px;
+/* override conflicting styles */
+input[id^="input-"]:focus,
+input[id^="input-"] {
+  box-shadow: unset;
+  border: 0;
 }
 
-.campaign_param_tabs_main {
-    margin-top: 25px;
-    margin-left: 10px;
-}
-
-.tab_admin_camp, .tab_admin_prod {
-    display: none;
-}
-
-.admin_tabs_button {
-    display: inline;
-    background: #c8c8c8;
-    color:white;
-    padding: 10px;
-    cursor: pointer;
-    margin-right: 5px;
-    border-bottom: none;
-    border: 1px solid #c8c8c8;
-    border-bottom: none;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.admin_tabs_button.active, 
-.admin_tabs_button:hover {
-    background: white;
-    color: black;
-}
-
-.admin_tabs_button.suppage {
-    background:#3a9b31;
-    float: right;
-    margin-top: -12px;
-    margin-right: 15px;
-}
-
-.admin_tabs_button.suppage a{
-    color:white;
-    text-decoration: none;
-}
-
-.tab_admin_camp.active, 
-.tab_admin_prod.active {
-    display: block;
-}
-
-.sedoo_admin_bloc .v-card__text input[type="text"]{
-    border:none;
-}
-
-.nextstpbtn {
-    margin-left: 10px;
+input.readonly,
+input[readonly],
+textarea.readonly,
+textarea[readonly] {
+  background-color: transparent;
 }
