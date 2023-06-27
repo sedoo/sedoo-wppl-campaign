@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Sedoo - Campaign product viewer
+ * Plugin Name: Sedoo - Campaign Manager
  * Description: Déclarer une campagne, ses produits et les viewers associés
  * Version: 1.1.0
  * Author: Pierre Vert & Nicolas Gruwe 
