@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * Activate Sedoo Components plugin
+ */
+add_action('plugins_loaded', 'sedoo_campaign_activate_required_plugins');
+function sedoo_campaign_activate_required_plugins()
+{
+    $plugin_path = 'sedoo-wppl-components/sedoo-wppl-components.php';
+    $active_plugins = get_option('active_plugins');
+    if (isset($active_plugins[$plugin_path])) {
+        // if the plugin is already active, do nothing
+        return;
+    }
+
+    // Include the plugin.php file so you have access to the activate_plugin() function
+    require_once(ABSPATH . '/wp-admin/includes/plugin.php');
+    // Activate your plugin
+    activate_plugin($plugin_path);
+}
+
 ///////
 // REGISTER DEFAULT VIEWER BLOC
 function sedoo_campaign_register_viewer_bloc_callback($block)
