@@ -5,49 +5,16 @@
  */
 
 /**
- * Name of the campaign
+ * - Name of the campaign,
+ * - Backend ID of the campaign,
+ * - ID of the products menu,
+ * - ID of the campaign main menu,
+ * - ID of the data policy page,
+ * - ID of the catalogue page,
+ * - ID of the catalogue component: @see sedoo-wppl-components @link https://github.com/sedoo/sedoo-wppl-components,
+ * - ID of the Data Access menu item,
+ * - URLs if services and packages by product type: @var object $value 
  */
-add_option('swc_campaign_name', '', '', 'no');
-
-/**
- * Backend ID of the campaign
- */
-add_option('swc_campaign_id', '', '', 'no');
-
-/**
- * ID of the products menu
- */
-add_option('swc_products_menu_id', '', '', 'no');
-
-/**
- * ID of the campaign main menu
- */
-add_option('swc_main_menu_id', '', '', 'no');
-
-/**
- * ID of the data policy page
- */
-add_option('swc_data_policy_page_id', '', '', 'no');
-
-/**
- * ID of the catalogue page
- */
-add_option('swc_catalogue_page_id', '', '', 'no');
-
-/**
- * ID of the catalogue component
- * @see sedoo-wppl-components 
- * @link https://github.com/sedoo/sedoo-wppl-components
- */
-add_option('swc_catalogue_component_id', '', '', 'no');
-
-/**
- * ID of the Data Access menu item
- */
-add_option('swc_data_access_menu_item_id', '', '', 'no');
-
-/**
- * URLs if services and packages by product type
- * @var object $value 
- */
-add_option('swc_product_service_urls', '', '', 'no');
+foreach (SWC_PLUGIN_OPTIONS as $option) {
+    add_option($option, '', '', 'no');
+}

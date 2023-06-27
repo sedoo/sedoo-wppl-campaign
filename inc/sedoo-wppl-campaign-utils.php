@@ -19,6 +19,21 @@ if ($product_nav_menu_id) {
 }
 define("MENU_API_URL", $menu_api_url);
 
+/**
+ * Define plugin options
+ */
+define("SWC_PLUGIN_OPTIONS",  array(
+    'swc_campaign_name',
+    'swc_campaign_id',
+    'swc_products_menu_id',
+    'swc_main_menu_id',
+    'swc_data_policy_page_id',
+    'swc_catalogue_page_id',
+    'swc_catalogue_component_id',
+    'swc_data_access_menu_item_id',
+    'swc_product_service_urls'
+));
+
 // Utils
 function sedoo_campaign_call_api($method, $url, $data = false)
 {
