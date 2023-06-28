@@ -1,12 +1,22 @@
 /**
  * Campaign admin step 2
- * Save campaign name and id to wordpress meta once they are set
+ * Save campaign id, name and settings once they are set (pages to create, etc.)
+ *
  */
-jQuery("#wp-save-campaign-name").click(function () {
-  var idBackend = jQuery(this).attr("wp-id-backend");
-  var campaignName = jQuery(this).attr("wp-campaign-name");
-  sedoo_campaign_updateOptionMeta("swc_campaign_id", idBackend);
-  sedoo_campaign_updateOptionMeta("swc_campaign_name", campaignName);
+jQuery("#wp-save-settings").click(function () {
+  const idBackend = jQuery(this).attr("wp-id-backend");
+  const campaignName = jQuery(this).attr("wp-campaign-name");
+  if (idBackend && campaignName) {
+    sedoo_campaign_updateOptionMeta("swc_campaign_id", idBackend);
+    sedoo_campaign_updateOptionMeta("swc_campaign_name", campaignName);
+  }
+  // save settings
+  const settingsStr = jQuery(this).attr("wp-settings");
+  const settings = JSON.parse(settingsStr);
+  console.log(settings);
+  sedoo_campaign_updateOptionMeta("swc_settings", settings);
+  // sedoo_campaign_generateOrDeletePosts({ catalogue: settings.catalogue, dataPolicy: settings.dataPolicy, products: settings.products, userManagement: settings.userManagement });
+  // sedoo_campaign_sendInfoToSedooRequests({ftp: settings.ftpAccess, login, password }) // tickets
 });
 
 /**
@@ -14,7 +24,7 @@ jQuery("#wp-save-campaign-name").click(function () {
  * Save products services urls to wordpress meta once they are set
  */
 jQuery("#wp-save-services").click(function () {
-  var productsServicesStr = jQuery(this).attr("wp-services");
+  const productsServicesStr = jQuery(this).attr("wp-services");
   const services = JSON.parse(productsServicesStr);
   sedoo_campaign_updateOptionMeta("swc_product_service_urls", services);
 });
@@ -23,8 +33,8 @@ jQuery("#wp-save-services").click(function () {
  * Campaign admin step 4
  * Save products and update products menu
  */
-jQuery("#SynchroniseProducts").click(function () {
-  var id_backend = jQuery(this).attr("id_backend");
+jQuery("#wp-synchronise-products").click(function () {
+  const id_backend = jQuery(this).attr("id_backend");
 
   // check if product menu exist, if not, just recreate it before importation
   jQuery.ajax({
@@ -51,6 +61,13 @@ jQuery("#SynchroniseProducts").click(function () {
       });
     }
   });
+});
+
+/**
+ * Campaign admin last step
+ */
+jQuery("#wp-save-campaign").click(function () {
+  sedoo_campaign_updateOptionMeta("swc_first_setup_done", true);
 });
 
 // checker pour supprimer les produits plus dans le flux

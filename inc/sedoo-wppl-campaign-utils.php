@@ -25,6 +25,7 @@ define("MENU_API_URL", $menu_api_url);
 define("SWC_PLUGIN_OPTIONS",  array(
     'swc_campaign_name',
     'swc_campaign_id',
+    'swc_settings',
     'swc_products_menu_id',
     'swc_main_menu_id',
     'swc_data_policy_page_id',

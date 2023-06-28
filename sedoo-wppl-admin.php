@@ -5,37 +5,53 @@
  */
 function sedoo_campaign_admin_page_view()
 {
-	$campaign_name_attr = '';
-	if ($campaignName = get_option('swc_campaign_name')) {
-		// get campaign data from backend
-		// $response = sedoo_campaign_call_api("GET", CAMPAIGNS_SERVICE_URL . "/campaign/v1_0/findbyname/" . $campaignName);
-		$campaign_name_attr = "campaign-name='" . $campaignName . "'";
-	}
+    $is_admin_attr = '';
+    if (is_super_admin()) {
+        $is_admin_attr = "is-admin='true'";
+    }
 
-	$services_by_product_type = get_option('swc_product_service_urls', false);
-	$product_services_attr = '';
-	if ($services_by_product_type !== false && $services_by_product_type != null) {
-		$product_services_attr = "services-by-product-type='" . json_encode($services_by_product_type) . "'";
-	}
+    $first_setup_done_attr = '';
+    if (get_option('swc_first_setup_done', false)) {
+        $first_setup_done_attr = "first-setup-done='true'";
+    }
+
+    $campaign_name_attr = '';
+    if ($campaignName = get_option('swc_campaign_name')) {
+        // get campaign data from backend
+        // $response = sedoo_campaign_call_api("GET", CAMPAIGNS_SERVICE_URL . "/campaign/v1_0/findbyname/" . $campaignName);
+        $campaign_name_attr = "campaign-name='" . $campaignName . "'";
+    }
+
+    $campaign_settings = get_option('swc_settings', false);
+    $campaign_settings_attr = '';
+    if ($campaign_settings !== false && $campaign_settings != null) {
+        $campaign_settings_attr = "campaign-settings='" . json_encode($campaign_settings) . "'";
+    }
+
+    $services_by_product_type = get_option('swc_product_service_urls', false);
+    $product_services_attr = '';
+    if ($services_by_product_type !== false && $services_by_product_type != null) {
+        $product_services_attr = "services-by-product-type='" . json_encode($services_by_product_type) . "'";
+    }
 
 ?>
-	<div class="sedoo_admin_bloc">
-		<sedoocampaigns-admin campaigns-service="<?= CAMPAIGNS_SERVICE_URL ?>" <?= $campaign_name_attr ?> <?= $product_services_attr ?>></sedoocampaigns-admin>
-	</div>
-<?php }
+    <div class="sedoo_admin_bloc">
+        <sedoocampaigns-admin <?= $is_admin_attr ?> <?= $first_setup_done_attr ?> campaigns-service="<?= CAMPAIGNS_SERVICE_URL ?>" <?= $campaign_settings_attr ?> <?= $campaign_name_attr ?> <?= $product_services_attr ?>></sedoocampaigns-admin>
+    </div>
+    <?php }
 
 ///////
 // INCLUDE BACK CSS FOR CAMPAIGN ADMIN PAGE
 function sedoo_campaign_include_admin_scripts()
 {
-	if (get_admin_page_title() == "sedoo-campaign-main-admin-page") {
-		wp_enqueue_style('sedoo_campaign_back_css', plugin_dir_url(__FILE__) . '/css/back.css');
-		wp_register_script('sedoocampaign-ajax', plugin_dir_url(__FILE__) . 'js/widget_main_page.js', null, null, true);
-		wp_enqueue_script('sedoocampaign-ajax');
+    if (get_admin_page_title() == "sedoo-campaign-main-admin-page") {
+        wp_enqueue_style('sedoo_campaign_back_css', plugin_dir_url(__FILE__) . '/css/back.css');
+        wp_register_script('sedoocampaign-ajax', plugin_dir_url(__FILE__) . 'js/widget_main_page.js', null, null, true);
+        wp_enqueue_script('sedoocampaign-ajax');
 
-		wp_register_script('sedoocampaigns-vjs', JS_PACKAGE_URL, null, "0.1.0", false);
-		wp_enqueue_script('sedoocampaigns-vjs');
-	}
+        wp_register_script('sedoocampaigns-vjs', JS_PACKAGE_URL, null, "0.1.0", false);
+        wp_enqueue_script('sedoocampaigns-vjs');
+    }
 }
 add_action('admin_enqueue_scripts', 'sedoo_campaign_include_admin_scripts');
 // END INCLUDE BACK CSS FOR CAMPAIGN ADMIN PAGE
@@ -46,13 +62,13 @@ add_action('admin_enqueue_scripts', 'sedoo_campaign_include_admin_scripts');
 add_action('admin_menu', 'sedoo_campaign_menu');
 function sedoo_campaign_menu()
 {
-	add_menu_page(
-		'sedoo-campaign-main-admin-page',
-		'Ma campagne',
-		'administrator',
-		'sedoo-campaign-admin-main-page',
-		'sedoo_campaign_admin_page_view'
-	);
+    add_menu_page(
+        'sedoo-campaign-main-admin-page',
+        'Ma campagne',
+        'administrator',
+        'sedoo-campaign-admin-main-page',
+        'sedoo_campaign_admin_page_view'
+    );
 }
 // END THE MAIN ADMINISTRATION PAGE
 //////
@@ -84,7 +100,7 @@ add_action('admin_notices', 'sedoo_campaign_notice');
 function sedoo_campaign_notice()
 {
     if (!class_exists('ACF')) :
-?>
+    ?>
         <div class="notice notice-warning is-dismissible">
             <p><?php _e('Please activate Advanced Custom Fields, it is required for <strong>' . get_plugin_data(__FILE__)['Name'] .  '</strong> plugin to work properly.', 'my_plugin_textdomain'); ?></p>
         </div>
