@@ -286,7 +286,7 @@ function sedoo_campaign_create_user_manager_page()
         $user_manager_component_args = array(
             'post_title'    => wp_strip_all_tags('User Manager'),
             'post_name'        => 'user-manager',
-            'post_status'   => 'private',
+            'post_status'   => 'publish',
             'post_type'        => 'vuejs',
             'post_author'   => 1
         );
@@ -303,7 +303,7 @@ function sedoo_campaign_create_user_manager_page()
 
         // CREATE PAGE
         $user_manager_page_content = '<!-- wp:acf/sedoo-blocks-vuejs {"id":"block_6023afff16ad3","name":"acf/sedoo-blocks-vuejs","data":{"field_5e663f64b0b3a":["' . $user_manager_component_id . '"]},"align":"","mode":"preview"} /-->';
-        sedoo_campaign_create_post('User Manager Page', $user_manager_page_content, 'page', 'swc_user_manager_page_id', 'private');
+        sedoo_campaign_create_post('User Manager Page', $user_manager_page_content, 'page', 'swc_user_manager_page_id', 'publish');
     }
 }
 

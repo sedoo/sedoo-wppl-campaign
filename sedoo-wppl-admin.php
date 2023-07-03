@@ -125,8 +125,10 @@ function sedoo_campaign_remove_delete_possibilitie_post_types($post_ID)
     // get catalogue and data policy page
     array_push($restrictedIdArray, get_option('swc_catalogue_page_id'));
     array_push($restrictedIdArray, get_option('swc_data_policy_page_id'));
+    array_push($restrictedIdArray, get_option('swc_user_manager_page_id'));
     // get catalogue web component
     array_push($restrictedIdArray, get_option('swc_catalogue_component_id'));
+    array_push($restrictedIdArray, get_option('swc_user_manager_component_id'));
     // get default viewer -> does not exist
     // array_push($restrictedIdArray, get_option('swc_default_viewer_id'));
 
