@@ -1,7 +1,7 @@
 <?php
 function sedoo_campaign_remove_products()
 {
-    if (function_exists('acf_remove_local_field_group')) return;
+    if (!function_exists('acf_remove_local_field_group')) return;
     acf_remove_local_field_group('group_60c21d19d8896');
     acf_remove_local_field_group('group_600976e621bfa');
     acf_remove_local_field_group('group_5f846daf38429');
@@ -9,7 +9,7 @@ function sedoo_campaign_remove_products()
 
 function sedoo_campaign_create_products()
 {
-    if (function_exists('acf_add_local_field_group')) return;
+    if (!function_exists('acf_add_local_field_group')) return;
     // SINGLE PRODUCT FIELDS
     acf_add_local_field_group(array(
         'key' => 'group_60c21d19d8896',

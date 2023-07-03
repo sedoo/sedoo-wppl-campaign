@@ -114,7 +114,7 @@ function sedoo_campaign_find_item_in_menu($item, $menu_items)
 {
     foreach ($menu_items as $menu_item) {
         if ($menu_item->object_id == $item) {
-            return $menu_item->ID;
+            return $menu_item;
         }
     }
     return 0;

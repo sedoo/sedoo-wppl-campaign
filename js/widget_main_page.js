@@ -32,33 +32,38 @@ jQuery("#wp-save-services").click(function () {
  * Campaign admin step 4
  * Save products and update products menu
  */
-jQuery("#wp-synchronise-products").click(function () {
-  const id_backend = jQuery(this).attr("id_backend");
+jQuery("#wp-synchronise-products").ready(function () {
+  jQuery("#wp-synchronise-products").click(function () {
+    const id_backend = jQuery(this).attr("id_backend");
 
-  // check if product menu exist, if not, just recreate it before importation
-  jQuery.ajax({
-    url: ajaxurl,
-    type: "GET",
-    data: {
-      action: "sedoo_campaign_check_product_menu"
-    },
-    success: function (success) {
-      var products_id_array = [];
-      var i = 0;
-      jQuery.ajax({
-        url:
-          "https://api.sedoo.fr/sedoo-campaigns-rest/inputproduct/v1_0/list/" +
-          id_backend,
-        type: "GET",
-        success: function (result) {
-          for (i = 0; i < result.length; i++) {
-            products_id_array.push(result[i].id);
-            sedoo_campaign_createOrUpdateCampaignProduct(result[i]);
-          }
-          sedoo_campaign_check_for_deleted_product(products_id_array);
+    // check if product menu exist, if not, just recreate it before importation
+    jQuery.ajax({
+      url: ajaxurl,
+      type: "GET",
+      data: {
+        action: "sedoo_campaign_check_product_menu"
+      },
+      success: function (response) {
+        const data = JSON.parse(response);
+        var products_id_array = [];
+        var i = 0;
+        if (data.status === "success") {
+          jQuery.ajax({
+            url:
+              "https://api.sedoo.fr/sedoo-campaigns-rest/inputproduct/v1_0/list/" +
+              id_backend,
+            type: "GET",
+            success: function (result) {
+              for (i = 0; i < result.length; i++) {
+                products_id_array.push(result[i].id);
+                sedoo_campaign_createOrUpdateCampaignProduct(result[i]);
+              }
+              sedoo_campaign_check_for_deleted_product(products_id_array);
+            }
+          });
         }
-      });
-    }
+      }
+    });
   });
 });
 

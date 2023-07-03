@@ -15,35 +15,43 @@ function sedoo_campaign_create_or_update_product()
     $menu_id = get_option('swc_products_menu_id');
     $menu_items = wp_get_nav_menu_items($menu_id);
     $product_id = sedoo_campaign_the_slug_exists($slug, 'sedoo_camp_products');
-
     if ($product_id === 0) {
         $product_menu_id = 0;
+        $menu_item_parent = "0";
+        $menu_item_position = 0;
     } else {
-        $product_menu_id = sedoo_campaign_find_item_in_menu($product_id, $menu_items);
+        $product_menu_item = sedoo_campaign_find_item_in_menu($product_id, $menu_items);
+        $product_menu_id = $product_menu_item->ID;
+        $menu_item_parent = $product_menu_item->menu_item_parent;
+        $menu_item_position = $product_menu_item->menu_order;
     }
 
-    // add or update product
     $product = array(
-        'ID' => $product_id,
+        'ID'            => $product_id,
         'post_title'    => $name,
-        'post_name'        => $slug,
+        'post_name'     => $slug,
         'post_content'  => '',
         'post_status'   => 'publish',
         'post_author'   => 1,
-        'post_type' => 'sedoo_camp_products'
+        'post_type'     => 'sedoo_camp_products'
     );
+
+    // add or update product
     $post_id = wp_insert_post($product);
     update_field('field_600976ee6a445', $name, $post_id); // name field
     update_field('field_600977076a446', $slug, $post_id); // id field
     update_field('field_600979ee6a655', $_POST['product']['_class'], $post_id); // type field
 
-    // add product to product menu or update
+
+    // add product to product menu or update product and keep its position
     $item_args = array(
         'menu-item-title' => $name,
         'menu-item-object-id' => $post_id,
         'menu-item-object' => 'sedoo_camp_products',
         'menu-item-type' => 'post_type',
-        'menu-item-status' => 'publish'
+        'menu-item-status' => 'publish',
+        'menu-item-position' => $menu_item_position,
+        'menu-item-parent-id' => $menu_item_parent
     );
     wp_update_nav_menu_item($menu_id, $product_menu_id, $item_args);
 
@@ -58,20 +66,26 @@ add_action('wp_ajax_sedoo_campaign_check_product_menu', 'sedoo_campaign_check_pr
 add_action('wp_ajax_nopriv_sedoo_campaign_check_product_menu', 'sedoo_campaign_check_product_menu');
 function sedoo_campaign_check_product_menu()
 {
+    $response = [
+        'status' => 'success',
+        'message' => 'The menu already exists.',
+    ];
     if (wp_get_nav_menu_object('sedoo-campaign-product-main-menu') == false) { // si il n'y a plus de menu produits, j'en recrée un
         $productMenuId = wp_create_nav_menu('sedoo-campaign-product-main-menu');
         update_option('swc_products_menu_id', $productMenuId);
         if (is_int($productMenuId)) {
-            return [
+            $response = [
                 'status' => 'success',
                 'message' => 'The menu was successfully created.',
             ];
+        } else {
+            $response = [
+                'status' => 'error',
+                'message' => 'An error occured when attempting to create the menu.',
+            ];
         }
     }
-    return [
-        'status' => 'error',
-        'message' => 'An error occured when attempting to create the menu.',
-    ];
+    echo json_encode($response);
     wp_die();
 }
 // END CHECK IF PRODUCT MENU IS EXISTING OR NOT BEFORE IMPORT PRODUCTS
@@ -97,6 +111,8 @@ function sedoo_campaign_check_and_delete_missing_products_in_the_flux()
             wp_delete_post($WPproduct->ID);
         }
     }
+
+    wp_die();
 }
 //  END CHECK FOR MISSING PRODUCTS IN THE JS FLUX
 /////////
