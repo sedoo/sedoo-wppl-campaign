@@ -3,7 +3,6 @@
 /**
  * All things AJAX
  */
-
 add_action('wp_ajax_sedoo_campaign_create_or_update_product', 'sedoo_campaign_create_or_update_product');
 add_action('wp_ajax_nopriv_sedoo_campaign_create_or_update_product', 'sedoo_campaign_create_or_update_product');
 function sedoo_campaign_create_or_update_product()

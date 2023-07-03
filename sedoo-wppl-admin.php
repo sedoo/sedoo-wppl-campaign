@@ -59,7 +59,7 @@ add_action('admin_enqueue_scripts', 'sedoo_campaign_include_admin_scripts');
 
 //////
 // THE MAIN ADMINISTRATION PAGE
-add_action('admin_menu', 'sedoo_campaign_menu');
+add_action('init', 'sedoo_campaign_menu');
 function sedoo_campaign_menu()
 {
     add_menu_page(
@@ -67,7 +67,9 @@ function sedoo_campaign_menu()
         'Ma campagne',
         'administrator',
         'sedoo-campaign-admin-main-page',
-        'sedoo_campaign_admin_page_view'
+        'sedoo_campaign_admin_page_view',
+        '',
+        98
     );
 }
 // END THE MAIN ADMINISTRATION PAGE

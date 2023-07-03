@@ -21,7 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
   let tabFocus = 0;
 
   tabList.addEventListener("keydown", (e) => {
-    console.log(e);
     // Move right
     if (e.keyCode === 39 || e.keyCode === 37) {
       tabs[tabFocus].setAttribute("tabindex", -1);

@@ -13,9 +13,8 @@ jQuery("#wp-save-settings").click(function () {
   // save settings
   const settingsStr = jQuery(this).attr("wp-settings");
   const settings = JSON.parse(settingsStr);
-  console.log(settings);
   sedoo_campaign_updateOptionMeta("swc_settings", settings);
-  // sedoo_campaign_generateOrDeletePosts({ catalogue: settings.catalogue, dataPolicy: settings.dataPolicy, products: settings.products, userManagement: settings.userManagement });
+  // window.location.reload();
   // sedoo_campaign_sendInfoToSedooRequests({ftp: settings.ftpAccess, login, password }) // tickets
 });
 

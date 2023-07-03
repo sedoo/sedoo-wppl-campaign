@@ -23,16 +23,20 @@ define("MENU_API_URL", $menu_api_url);
  * Define plugin options
  */
 define("SWC_PLUGIN_OPTIONS",  array(
-    'swc_campaign_name',
     'swc_campaign_id',
-    'swc_settings',
-    'swc_products_menu_id',
-    'swc_main_menu_id',
-    'swc_data_policy_page_id',
-    'swc_catalogue_page_id',
+    'swc_campaign_name',
     'swc_catalogue_component_id',
+    'swc_catalogue_page_id',
     'swc_data_access_menu_item_id',
-    'swc_product_service_urls'
+    'swc_data_policy_page_id',
+    'swc_first_setup_done',
+    'swc_main_menu_id',
+    'swc_product_service_urls',
+    'swc_products_archive_menu_item',
+    'swc_products_menu_id',
+    'swc_settings',
+    'swc_user_manager_component_id',
+    'swc_user_manager_page_id'
 ));
 
 // Utils
@@ -118,12 +122,12 @@ function sedoo_campaign_find_item_in_menu($item, $menu_items)
 
 ///////
 // CREATE A SIMPLE POST
-function sedoo_campaign_create_post($title, $content, $post_type, $optionfield)
+function sedoo_campaign_create_post($title, $content, $post_type, $optionfield, $post_status = 'publish')
 {
     $added_post = array(
         'post_title'    => $title,
         'post_content'  => $content,
-        'post_status'   => 'publish',
+        'post_status'   => $post_status,
         'post_author'   => 1,
         'post_type' => $post_type
     );
