@@ -14,7 +14,6 @@ jQuery("#wp-save-settings").click(function () {
   const settingsStr = jQuery(this).attr("wp-settings");
   const settings = JSON.parse(settingsStr);
   sedoo_campaign_updateOptionMeta("swc_settings", settings);
-  // window.location.reload();
   // sedoo_campaign_sendInfoToSedooRequests({ftp: settings.ftpAccess, login, password }) // tickets
 });
 
@@ -110,6 +109,9 @@ function sedoo_campaign_updateOptionMeta(metakey, metavalue) {
       metakey: metakey,
       metavalue: metavalue
     },
-    success: function (result) {}
+    success: function (result) {
+      // on success, reload page to take into account new option values
+      document.location.reload(true);
+    }
   });
 }
