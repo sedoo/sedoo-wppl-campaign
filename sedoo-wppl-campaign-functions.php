@@ -172,156 +172,32 @@ add_action('init', 'sedoo_campaign_init_main_menu', 0);
 // END CREATE THE MAIN MENU
 ///////
 
-//////
-// CREATE DATA POLICY FRONT PAGE
-function sedoo_campaign_create_data_policy_page()
+add_action('init', 'sedoo_campaign_page_handler');
+function sedoo_campaign_page_handler()
 {
-    if (!get_option('swc_data_policy_page_id')) {
-        $datapolicycontent = "Ici mon contenu";
-        $page_id = sedoo_campaign_create_post('Data Policy', $datapolicycontent, 'page', 'swc_data_policy_page_id');
-        if (get_option('swc_main_menu_id')) {
-            $id_main_menu = get_option('swc_main_menu_id');
-            $id_data_acces_item = get_option('swc_data_access_menu_item_id');
-            $item = wp_update_nav_menu_item(
-                $id_main_menu,
-                0,
-                array(
-                    'menu-item-title' => 'Data Policy',
-                    'menu-item-object-id' => $page_id,
-                    'menu-item-object' => 'page',
-                    'menu-item-type' => 'post_type',
-                    'menu-item-status' => 'publish',
-                    'menu-item-parent-id' => $id_data_acces_item
-                )
-            );
-        }
-    }
-}
-add_action('init', function () {
-    $settings = get_option('swc_settings');
+    if (false === $settings = get_option('swc_settings')) return;
+
     if ($settings->dataPolicy === "true") {
-        sedoo_campaign_create_data_policy_page();
+        sedoo_campaign_create_page('swc_data_policy_page_id', 'Data Policy', 'Ici mon contenu');
     } else {
-
-        if ($postID = get_option('swc_data_policy_page_id')) {
-            wp_delete_post($postID, true);
-        }
-        delete_option('swc_data_policy_page_id');
+        sedoo_campaign_delete_page('swc_data_policy_page_id');
     }
-});
-// END CREATE DATA POLICY FRONT PAGE
-//////
 
-///////
-// CREATE THE CATALOGUE WEB COMPONENT
-// NB : this function updates acf fields from the sedoo-wppl-components plugin
-function sedoo_campaign_init_create_catalogue()
-{
-    if (!get_option('swc_catalogue_component_id')) {
-        $catalogueWebComponentArgs = array(
-            'post_title'    => wp_strip_all_tags('Catalogue'),
-            'post_name'        => 'catalogue',
-            'post_status'   => 'publish',
-            'post_type'        => 'vuejs',
-            'post_author'   => 1
-        );
-        $catalogue_component_Id = wp_insert_post($catalogueWebComponentArgs);
-        update_option('swc_catalogue_component_id', $catalogue_component_Id); // update campaign option
-        $scripts_values = array(
-            array("script"   => '<script src="https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/aeris-catalogue-component/3.0.0"></script>')
-        );
-        update_field('elements_inclus', $scripts_values, $catalogue_component_Id); // update viewer scripts
-
-        $block_content = '<sedoo-catalogue language="$$LANGUAGE$$" project="$$CAMPAIGNNAME$$"  blank-request="true"></sedoo-catalogue>';
-
-        update_field('contenu_du_block', $block_content, $catalogue_component_Id); // update viewer div
-
-        // CREATE CATALOGUE PAGE
-        $contenu_page_catalogue = '<!-- wp:acf/sedoo-blocks-vuejs {"id":"block_6023afff16ad3","name":"acf/sedoo-blocks-vuejs","data":{"field_5e663f64b0b3a":["' . $catalogue_component_Id . '"]},"align":"","mode":"preview"} /-->';
-        $page_catalogue_id = sedoo_campaign_create_post('Page Catalogue', $contenu_page_catalogue, 'page', 'swc_catalogue_page_id');
-        if (get_option('swc_main_menu_id')) {
-            $id_product_menu = get_option('swc_main_menu_id');
-            $id_data_acces_item = get_option('swc_data_access_menu_item_id');
-            wp_update_nav_menu_item(
-                $id_product_menu,
-                0,
-                array( // ADD PAGE TO THE MAIN MENU
-                    'menu-item-title' => 'Catalogue',
-                    'menu-item-object-id' => $page_catalogue_id,
-                    'menu-item-object' => 'page',
-                    'menu-item-type' => 'post_type',
-                    'menu-item-status' => 'publish',
-                    'menu-item-parent-id' => $id_data_acces_item
-                )
-            );
-        }
-    }
-}
-
-add_action('init', function () {
-    $settings = get_option('swc_settings');
     if ($settings->catalogue === "true") {
-        sedoo_campaign_init_create_catalogue();
+        $catalogue_component_id = sedoo_campaign_create_component('swc_catalogue_component_id', 'Catalogue', 'https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/aeris-catalogue-component/3.0.0', '<sedoo-catalogue language="$$LANGUAGE$$" project="$$CAMPAIGNNAME$$"  blank-request="true"></sedoo-catalogue>');
+        $catalogue_page_content = '<!-- wp:acf/sedoo-blocks-vuejs {"id":"block_6023afff16ad3","name":"acf/sedoo-blocks-vuejs","data":{"field_5e663f64b0b3a":["' . $catalogue_component_id . '"]},"align":"","mode":"preview"} /-->';
+        sedoo_campaign_create_page('swc_catalogue_page_id', 'Catalogue', $catalogue_page_content);
     } else {
-
-        if ($postID = get_option('swc_catalogue_page_id')) {
-            wp_delete_post($postID, true);
-        }
-        if ($componentID = get_option('swc_catalogue_component_id')) {
-            wp_delete_post($componentID, true);
-        }
-        delete_option('swc_catalogue_page_id');
-        delete_option('swc_catalogue_component_id');
+        sedoo_campaign_delete_page('swc_catalogue_page_id');
+        sedoo_campaign_delete_page('swc_catalogue_component_id');
     }
-});
-// END CREATE THE CATALOGUE WEB COMPONENT
-///////
 
-///////
-// CREATE USER MANAGER (page & component)
-// https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/sedoo-access-vjs/0.1.0
-function sedoo_campaign_create_user_manager_page()
-{
-    if (!get_option('swc_user_manager_component_id')) {
-        $user_manager_component_args = array(
-            'post_title'    => wp_strip_all_tags('User Manager'),
-            'post_name'        => 'user-manager',
-            'post_status'   => 'publish',
-            'post_type'        => 'vuejs',
-            'post_author'   => 1
-        );
-        $user_manager_component_id = wp_insert_post($user_manager_component_args);
-        update_option('swc_user_manager_component_id', $user_manager_component_id); // update campaign option
-        $scripts_values = array(
-            array("script"   => '<script src="https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/sedoo-access-vjs/0.1.0"></script>')
-        );
-        update_field('elements_inclus', $scripts_values, $user_manager_component_id); // update viewer scripts
-
-        $block_content = '<span><div id="app"></div></span>';
-
-        update_field('contenu_du_block', $block_content, $user_manager_component_id); // update viewer div
-
-        // CREATE PAGE
+    if ($settings->userManagement === "true") {
+        $user_manager_component_id = sedoo_campaign_create_component('swc_user_manager_component_id', 'User Manager', 'https://api.sedoo.fr/aeris-cdn-rest/jsrepo/v1_0/download/sandbox/release/sedoo-access-vjs/0.1.0', '<span><div id="app"></div></span>');
         $user_manager_page_content = '<!-- wp:acf/sedoo-blocks-vuejs {"id":"block_6023afff16ad3","name":"acf/sedoo-blocks-vuejs","data":{"field_5e663f64b0b3a":["' . $user_manager_component_id . '"]},"align":"","mode":"preview"} /-->';
-        sedoo_campaign_create_post('User Manager Page', $user_manager_page_content, 'page', 'swc_user_manager_page_id', 'publish');
+        sedoo_campaign_create_page('swc_user_manager_page_id', 'User Manager', $user_manager_page_content);
+    } else {
+        sedoo_campaign_delete_page('swc_user_manager_page_id');
+        sedoo_campaign_delete_page('swc_user_manager_component_id');
     }
 }
-
-add_action('init', function () {
-    $settings = get_option('swc_settings');
-    if ($settings->userManagement === "true") {
-        sedoo_campaign_create_user_manager_page();
-    } else {
-
-        if ($postID = get_option('swc_user_manager_page_id')) {
-            wp_delete_post($postID, true);
-        }
-        if ($componentID = get_option('swc_user_manager_component_id')) {
-            wp_delete_post($componentID, true);
-        }
-        delete_option('swc_user_manager_page_id');
-        delete_option('swc_user_manager_component_id');
-    }
-});
-// END CREATE USER MANAGER (page & component)
-///////

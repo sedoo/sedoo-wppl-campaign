@@ -8,7 +8,9 @@
 
 /* override conflicting styles */
 input[id^="input-"]:focus,
-input[id^="input-"] {
+input[id^="input-"],
+input[id^="wp-"]:focus,
+input[id^="wp-"] {
   box-shadow: unset;
   border: 0;
 }

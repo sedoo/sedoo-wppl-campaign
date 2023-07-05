@@ -7,20 +7,18 @@ add_action('wp_ajax_sedoo_campaign_create_or_update_product', 'sedoo_campaign_cr
 add_action('wp_ajax_nopriv_sedoo_campaign_create_or_update_product', 'sedoo_campaign_create_or_update_product');
 function sedoo_campaign_create_or_update_product()
 {
-    if (!isset($_POST['product']['_class']) || !isset($_POST['product']['id']) || $_POST['product']['id'] == 0) {
-        return;
-    }
     $name = $_POST['product']['name'];
     $slug = $_POST['product']['id'];
     $menu_id = get_option('swc_products_menu_id');
     $menu_items = wp_get_nav_menu_items($menu_id);
     $product_id = sedoo_campaign_the_slug_exists($slug, 'sedoo_camp_products');
-    if ($product_id === 0) {
+    $product_menu_item = sedoo_campaign_find_item_in_menu($product_id, $menu_items);
+    
+    if ($product_menu_item === 0 || $product_id === 0) {
         $product_menu_id = 0;
-        $menu_item_parent = "0";
+        $menu_item_parent = 0;
         $menu_item_position = 0;
     } else {
-        $product_menu_item = sedoo_campaign_find_item_in_menu($product_id, $menu_items);
         $product_menu_id = $product_menu_item->ID;
         $menu_item_parent = $product_menu_item->menu_item_parent;
         $menu_item_position = $product_menu_item->menu_order;

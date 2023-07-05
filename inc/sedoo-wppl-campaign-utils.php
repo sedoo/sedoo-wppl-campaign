@@ -137,3 +137,54 @@ function sedoo_campaign_create_post($title, $content, $post_type, $optionfield, 
 }
 // END CREATE A SIMPLE POST
 ///////
+
+function sedoo_campaign_create_component($option_name, $component_title, $source_url, $block_content)
+{
+    if (!get_option($option_name)) {
+        $component_args = array(
+            'post_title'    => wp_strip_all_tags($component_title),
+            'post_name'     => str_replace(' ', '-', strtolower($component_title)),
+            'post_status'   => 'publish',
+            'post_type'     => 'vuejs',
+            'post_author'   => 1
+        );
+        $component_id = wp_insert_post($component_args);
+        update_option($option_name, $component_id); // update campaign option
+        $scripts_values = array(
+            array("script"   => '<script src="' . $source_url . '"></script>')
+        );
+        update_field('elements_inclus', $scripts_values, $component_id); // update viewer scripts
+        update_field('contenu_du_block', $block_content, $component_id); // update viewer div
+        return $component_id;
+    }
+}
+
+function sedoo_campaign_create_page($option_name, $page_title, $page_content = "")
+{
+    if (!get_option($option_name)) {
+        $page_id = sedoo_campaign_create_post($page_title, $page_content, 'page', $option_name);
+        if ($id_main_menu = get_option('swc_main_menu_id', false)) {
+            $id_data_acces_item = get_option('swc_data_access_menu_item_id');
+            wp_update_nav_menu_item(
+                $id_main_menu,
+                0,
+                array(
+                    'menu-item-title' => $page_title,
+                    'menu-item-object-id' => $page_id,
+                    'menu-item-object' => 'page',
+                    'menu-item-type' => 'post_type',
+                    'menu-item-status' => 'publish',
+                    'menu-item-parent-id' => $id_data_acces_item
+                )
+            );
+        }
+    }
+}
+
+function sedoo_campaign_delete_page($option_name)
+{
+    if ($id = get_option($option_name)) {
+        wp_delete_post($id, true);
+        delete_option($option_name);
+    }
+}

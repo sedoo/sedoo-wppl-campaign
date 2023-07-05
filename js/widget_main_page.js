@@ -4,8 +4,9 @@
  *
  */
 jQuery("#wp-save-settings").click(function () {
-  const idBackend = jQuery(this).attr("wp-id-backend");
-  const campaignName = jQuery(this).attr("wp-campaign-name");
+  const idBackend = jQuery("#wp-campaign-id-field").attr("data-wp");
+  const campaignName = jQuery("#wp-campaign-name-field").attr("data-wp");
+
   if (idBackend && campaignName) {
     sedoo_campaign_updateOptionMeta("swc_campaign_id", idBackend);
     sedoo_campaign_updateOptionMeta("swc_campaign_name", campaignName);
@@ -14,7 +15,6 @@ jQuery("#wp-save-settings").click(function () {
   const settingsStr = jQuery(this).attr("wp-settings");
   const settings = JSON.parse(settingsStr);
   sedoo_campaign_updateOptionMeta("swc_settings", settings);
-  // sedoo_campaign_sendInfoToSedooRequests({ftp: settings.ftpAccess, login, password }) // tickets
 });
 
 /**
@@ -70,7 +70,7 @@ jQuery("#wp-synchronise-products").ready(function () {
  * Campaign admin last step
  */
 jQuery("#wp-save-campaign").click(function () {
-  sedoo_campaign_updateOptionMeta("swc_first_setup_done", true);
+  sedoo_campaign_updateOptionMeta("swc_first_setup_done", true, true);
 });
 
 // checker pour supprimer les produits plus dans le flux
@@ -100,7 +100,11 @@ function sedoo_campaign_createOrUpdateCampaignProduct(product) {
 }
 
 // update une meta de la page "PARAMETRES DE CAMPAGNE"
-function sedoo_campaign_updateOptionMeta(metakey, metavalue) {
+function sedoo_campaign_updateOptionMeta(
+  metakey,
+  metavalue,
+  finalSave = false
+) {
   jQuery.ajax({
     url: ajaxurl,
     type: "POST",
@@ -110,8 +114,12 @@ function sedoo_campaign_updateOptionMeta(metakey, metavalue) {
       metavalue: metavalue
     },
     success: function (result) {
-      // on success, reload page to take into account new option values
-      document.location.reload(true);
+      const attr = jQuery("sedoocampaigns-admin").attr("first-setup-done");
+      // do not reload is first setup is not done
+      if ((typeof attr !== "undefined" && attr !== false) || finalSave) {
+        // on success, reload page to take into account new option values
+        document.location.reload(true);
+      }
     }
   });
 }

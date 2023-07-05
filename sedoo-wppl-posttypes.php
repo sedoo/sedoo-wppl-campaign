@@ -81,7 +81,7 @@ add_action('init', function () {
 		sedoo_campaign_unregister_product_post_type();
 		sedoo_campaign_remove_products();
 		wp_delete_post($products_archive_menu_item_id);
-		delete_option('swc_products_archive_menu_item', $products_archive_menu_item_id);
+		delete_option('swc_products_archive_menu_item');
 	}
 });
 // END CREATE THE PRODUCT POST TYPE
