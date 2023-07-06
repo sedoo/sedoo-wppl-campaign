@@ -54,7 +54,7 @@ function sedoo_campaign_register_product_post_type()
 		'rewrite'				=> array('slug' => 'products'),
 		'show_in_nav_menus'     => true,
 		'can_export'            => true,
-		'has_archive'           => true,
+		'has_archive'           => 'products',
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
