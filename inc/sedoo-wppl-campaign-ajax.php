@@ -3,6 +3,7 @@
 /**
  * All things AJAX
  */
+
 add_action('wp_ajax_sedoo_campaign_create_or_update_product', 'sedoo_campaign_create_or_update_product');
 add_action('wp_ajax_nopriv_sedoo_campaign_create_or_update_product', 'sedoo_campaign_create_or_update_product');
 function sedoo_campaign_create_or_update_product()
@@ -68,7 +69,7 @@ function sedoo_campaign_check_product_menu()
         'status' => 'success',
         'message' => 'The menu already exists.',
     ];
-    if (wp_get_nav_menu_object('sedoo-campaign-product-main-menu') == false) { // si il n'y a plus de menu produits, j'en recrée un
+    if (wp_get_nav_menu_object('sedoo-campaign-product-main-menu') == false) { // if the products menu does not exist anymore, create a new one
         $productMenuId = wp_create_nav_menu('sedoo-campaign-product-main-menu');
         update_option('swc_products_menu_id', $productMenuId);
         if (is_int($productMenuId)) {

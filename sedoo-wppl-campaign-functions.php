@@ -23,10 +23,10 @@ function sedoo_campaign_activate_required_plugins()
 // REGISTER DEFAULT VIEWER BLOC
 function sedoo_campaign_register_viewer_bloc_callback($block)
 {
-    $product_id = get_field('produits_a_afficher');
+    $product_id = get_field('products_to_display');
     $product_service_urls = get_option("swc_product_service_urls");
-    $type_produit = get_field('type', $product_id[0]);
-    $package_url = $product_service_urls->$type_produit->packageUrl;
+    $product_type = get_field('type', $product_id[0]);
+    $package_url = $product_service_urls->$product_type->packageUrl;
     // enqueue specific script for the block
     $script_handle = 'js-package-' . $product_id[0];
     wp_enqueue_script($script_handle, $package_url);
@@ -45,12 +45,12 @@ function sedoo_campaign_register_viewer_bloc()
     // register a testimonial block.
     acf_register_block_type(array(
         'name'              => 'sedoo_campaign_default_viewer',
-        'title'             => __('Viewer de produit'),
-        'description'       => __('Ajoute un viewer de produit'),
+        'title'             => __('Product viewer'),
+        'description'       => __('Adds a product viewer'),
         'render_callback'   => 'sedoo_campaign_register_viewer_bloc_callback',
         'category'          => 'widgets',
         'icon'              => 'admin-site-alt2',
-        'keywords'          => array('viewers', 'produit', 'sedoo'),
+        'keywords'          => array('viewers', 'product', 'sedoo'),
     ));
 }
 
@@ -102,8 +102,6 @@ add_action('wp_enqueue_scripts', 'sedoo_campaign_single_product_load_css');
 function sedoo_campaign_single_product_load_css()
 {
     if ('sedoo_camp_products' === get_post_type()) {
-        wp_register_style('font-awesome', "https://use.fontawesome.com/releases/v5.0.13/css/all.css");
-        wp_enqueue_style('font-awesome');
         wp_register_style('roboto-font', "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
         wp_enqueue_style('roboto-font');
         wp_register_style('mdi', "https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css");
@@ -119,22 +117,12 @@ function sedoo_campaign_single_product_load_css()
 // END INCLUDE FRONT CSS
 //////
 
-
-/**/
-// Adding Dashicons in WordPress Front-end
-/**/
-add_action('wp_enqueue_scripts', 'load_dashicons_front_end');
-function load_dashicons_front_end()
-{
-    wp_enqueue_style('dashicons');
-}
-
 ///////
 // CREATE THE PRODUCT MENU
 function sedoo_campaign_init_product_menu()
 {
-    if (get_option('swc_products_menu_id')) {  // si le menu des produits est déjà selectionné je fais rien
-    } else { // sinon je le crée et je l'associe
+    if (get_option('swc_products_menu_id')) {  // if products menu exists, do nothing
+    } else { // else, create the products menu
         $productMenuId = wp_create_nav_menu('sedoo-campaign-product-main-menu');
         update_option('swc_products_menu_id', $productMenuId);
     }
@@ -147,12 +135,12 @@ add_action('init', 'sedoo_campaign_init_product_menu', 0);
 // CREATE THE MAIN MENU
 function sedoo_campaign_init_main_menu()
 {
-    if (get_option('swc_main_menu_id')) { // si le menu principal est déjà selectionné je fais rien
+    if (get_option('swc_main_menu_id')) { // if main menu exists, do nothing
     } else {
-        if (has_nav_menu('primary-menu')) { // si un menu est déjà présent alors on utilise celui la
+        if (has_nav_menu('primary-menu')) { // if a primary menu already exists, use that one
             $mainMenuId = get_term(get_nav_menu_locations()['primary-menu'], 'nav_menu')->term_id;
             update_option('swc_main_menu_id', $mainMenuId);
-        } else { // sinon je le crée et on utilise celui la
+        } else { // else, create the main menu and use that one
             $mainMenuId = wp_create_nav_menu('sedoo-campaign-main-menu');
             update_option('swc_main_menu_id', $mainMenuId);
             $locations = get_theme_mod('nav_menu_locations');

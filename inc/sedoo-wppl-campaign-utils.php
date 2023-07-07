@@ -1,6 +1,7 @@
 <?php
 
-// Constants
+//--- Constants
+
 if ($_SERVER['HTTP_HOST'] === "localhost") {
     define("JS_PACKAGE_URL", "http://10.186.10.96:8081/js/app.js");
 } else {
@@ -39,7 +40,8 @@ define("SWC_PLUGIN_OPTIONS",  array(
     'swc_user_manager_page_id'
 ));
 
-// Utils
+//--- Utils functions
+
 function sedoo_campaign_call_api($method, $url, $data = false)
 {
     $curl = curl_init();
@@ -73,7 +75,6 @@ function sedoo_campaign_call_api($method, $url, $data = false)
     return $result;
 }
 
-
 function sedoo_campaign_array_to_object(array $arr)
 {
     if (is_array($arr)) {
@@ -93,7 +94,7 @@ function sedoo_campaign_is_plugin_active($path)
 ///////
 // CREATE OR UPDATE A PRODUCT
 ///////
-// Func to check if product already exist
+// Func to check if product already exists
 function sedoo_campaign_the_slug_exists($slug, $post_type)
 {
     $args = array(

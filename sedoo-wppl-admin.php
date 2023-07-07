@@ -64,7 +64,7 @@ function sedoo_campaign_menu()
 {
     add_menu_page(
         'sedoo-campaign-main-admin-page',
-        'Ma campagne',
+        'My Campaign',
         'administrator',
         'sedoo-campaign-admin-main-page',
         'sedoo_campaign_admin_page_view',
@@ -111,7 +111,7 @@ function sedoo_campaign_notice()
         <div class="notice notice-warning is-dismissible">
             <p><?php _e('Please activate SEDOO - VUE JS Components, it is required for <strong>' . get_plugin_data(__FILE__)['Name'] .  '</strong> plugin to work properly.', 'my_plugin_textdomain'); ?></p>
         </div>
-<?php endif;
+    <?php endif;
 }
 // END CHECK FOR REQUIRED PLUGINS
 ///////
@@ -136,7 +136,7 @@ function sedoo_campaign_remove_delete_possibilitie_post_types($post_ID)
         // save a transient with the message that user can't delete this
         set_transient(
             get_current_user_id() . '_sedoo_campaign_transient_cantremovepost_error',
-            __("Vous ne pouvez pas supprimer ce contenu, il est utilisé dans l'outil de campagne.", 'sedoo_campaign_remove_notice')
+            __("This content is needed for the campaign manager. It cannot be deleted.", 'sedoo_campaign_remove_notice')
         );
         // redirect the user and exit to prevent deletion
         wp_redirect(admin_url());
@@ -164,3 +164,17 @@ function sedoo_campaign_remove_delete_possibilitie_menus($menu_ID)
 add_action('wp_delete_nav_menu', 'sedoo_campaign_remove_delete_possibilitie_menus', 10, 1);
 // END REMOVE DELETE POSSIBILITIE FOR THE USED ID
 //////
+
+/**
+ * Adds css color variable in the admin head to be used by the sedoocampaigns-admin vue.js component
+ */
+add_action('admin_head', function () {
+    global $_wp_admin_css_colors;
+    ?>
+    <style>
+        :root {
+            --theme-color: <?= $_wp_admin_css_colors[get_user_option('admin_color')]->colors[2] ?>;
+        }
+    </style>
+<?php
+});

@@ -36,8 +36,8 @@ function sedoo_campaign_create_products()
             ),
             array(
                 'key' => 'field_60c21d3e5ddfc',
-                'label' => 'Label \'informations\'',
-                'name' => 'sedoo_campaign_product_label_informations',
+                'label' => 'Label for information',
+                'name' => 'sedoo_campaign_product_information_label',
                 'type' => 'text',
                 'instructions' => '',
                 'required' => 0,
@@ -47,7 +47,7 @@ function sedoo_campaign_create_products()
                     'class' => '',
                     'id' => '',
                 ),
-                'default_value' => 'Informations',
+                'default_value' => 'Information',
                 'placeholder' => '',
                 'prepend' => '',
                 'append' => '',
@@ -55,7 +55,7 @@ function sedoo_campaign_create_products()
             ),
             array(
                 'key' => 'field_60c21d1edc109',
-                'label' => 'Informations content',
+                'label' => 'Information content',
                 'name' => 'sedoo_campaign_product_information',
                 'type' => 'wysiwyg',
                 'instructions' => '',
@@ -98,7 +98,7 @@ function sedoo_campaign_create_products()
 
     acf_add_local_field_group(array(
         'key' => 'group_600976e621bfa',
-        'title' => 'Groupe de champs d\'un produit de campagne',
+        'title' => 'Campaign product field group',
         'fields' => array(
             array(
                 'key' => 'field_600976ee6a445',
@@ -182,16 +182,16 @@ function sedoo_campaign_create_products()
 
 
     ////////
-    // CHAMPS ACF DU BLOC DEFAULT VIEWERS
+    // ACF fields for defaultviewer block
     ///////
     acf_add_local_field_group(array(
         'key' => 'group_5f846daf38429',
-        'title' => 'Champs pour bloc misva',
+        'title' => 'Misva block field group',
         'fields' => array(
             array(
                 'key' => 'field_5f858dbfb1014',
-                'label' => 'Produits à afficher',
-                'name' => 'produits_a_afficher',
+                'label' => 'Products to display',
+                'name' => 'products_to_display',
                 'type' => 'relationship',
                 'instructions' => '',
                 'required' => 0,

@@ -7,7 +7,7 @@ $product_content = get_the_content();
 <div id="content" class="site-content">
     <div id="primary" class="content-area wrapper product_left_menu tocActive">
         <aside>
-            <span id="button_fold_menu" class="dashicons dashicons-arrow-left-alt2"></span>
+            <span id="button_fold_menu" class="mdi mdi-arrow-left"></span>
             <campaign-product-tree menu_api_url="<?= MENU_API_URL ?>"></campaign-product-tree>
         </aside>
         <main id="main" class="site-main">
@@ -17,15 +17,15 @@ $product_content = get_the_content();
                         <?php
                         $product = get_field('id'); // get product id and name
                         $breadcrumb = get_field('name'); // get product id and name
-                        $type_produit = get_field('type');
+                        $product_type = get_field('type');
                         $campaign = get_option('swc_campaign_name');
                         $product_service_urls = get_option("swc_product_service_urls");
-                        $service_url = $product_service_urls->$type_produit->serviceUrl;
-                        $package_url = $product_service_urls->$type_produit->packageUrl;
+                        $service_url = $product_service_urls->$product_type->serviceUrl;
+                        $package_url = $product_service_urls->$product_type->packageUrl;
 
                         // selection du type de viewer
                         $type_viewer = '';
-                        switch ($type_produit) {
+                        switch ($product_type) {
                             case 'calendarbasedproduct':
                                 break;
                             case 'filetree':
@@ -45,9 +45,9 @@ $product_content = get_the_content();
                         ?>
                             <div class="tabs">
                                 <?php
-                                if ((get_field('sedoo_campaign_product_label_informations', get_the_ID())) ||  !empty($product_content)) {
+                                if ((get_field('sedoo_campaign_product_information_label', get_the_ID())) ||  !empty($product_content)) {
                                 ?>
-                                    <nav role="tablist" aria-label="Description and informations">
+                                    <nav role="tablist" aria-label="Description and information">
 
                                         <button role="tab" aria-selected="true" aria-controls="visu" id="tab-1" tabindex="0">
                                             Visualisation
@@ -61,10 +61,10 @@ $product_content = get_the_content();
                                             }
                                             ?>
                                         </button>
-                                        <button role="tab" aria-selected="false" aria-controls="sedoo_campaign_product_informations" id="tab-3" tabindex="-1">
+                                        <button role="tab" aria-selected="false" aria-controls="sedoo_campaign_product_information" id="tab-3" tabindex="-1">
                                             <?php
-                                            if (get_field('sedoo_campaign_product_label_informations', get_the_ID())) {
-                                                the_field('sedoo_campaign_product_label_informations', get_the_ID());
+                                            if (get_field('sedoo_campaign_product_information_label', get_the_ID())) {
+                                                the_field('sedoo_campaign_product_information_label', get_the_ID());
                                             } else {
                                                 echo 'Details';
                                             }
@@ -82,7 +82,7 @@ $product_content = get_the_content();
                                 <section id="sedoo_campaign_product_description" role="tabpanel" tabindex="0" aria-labelledby="tab-2" hidden>
                                     <?= $product_content; ?>
                                 </section>
-                                <section id="sedoo_campaign_product_informations" role="tabpanel" tabindex="0" aria-labelledby="tab-2" hidden>
+                                <section id="sedoo_campaign_product_information" role="tabpanel" tabindex="0" aria-labelledby="tab-2" hidden>
                                     <?= get_field('sedoo_campaign_product_information', get_the_ID()); ?>
                                 </section>
 

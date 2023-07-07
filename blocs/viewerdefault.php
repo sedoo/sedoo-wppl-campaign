@@ -1,7 +1,7 @@
 <?php
 if (is_admin() == true) {
     ///////
-    // Pas besoin de montrer le composant si je suis en Admin, juste dire qu'il est la
+    // No need to display the component on admin side
     //////
 ?>
     <style>
@@ -15,7 +15,7 @@ if (is_admin() == true) {
     </style>
 
     <div class="sedoo_related_block_admin_block">
-        <h2> Bloc Viewer </h2> <span> Visible seulement en front-office </span>
+        <h2> Viewer Block </h2> <span> Only visible on the front side </span>
     </div>
 
 <?php
@@ -23,20 +23,20 @@ if (is_admin() == true) {
 ?>
     <section class="sedoo-campaign-view-product">
         <?php
-        $product_id = get_field('produits_a_afficher');
+        $product_id = get_field('products_to_display');
         $product = get_field('id', $product_id[0]); // get product id and name
         $breadcrumb = get_field('name', $product_id[0]); // get product id and name
-        $type_produit = get_field('type', $product_id[0]);
+        $product_type = get_field('type', $product_id[0]);
 
         $campaign = get_option('swc_campaign_name');
 
         $product_service_urls = get_option("swc_product_service_urls");
-        $service_url = $product_service_urls->$type_produit->serviceUrl;
-        $package_url = $product_service_urls->$type_produit->packageUrl;
+        $service_url = $product_service_urls->$product_type->serviceUrl;
+        $package_url = $product_service_urls->$product_type->packageUrl;
 
-        // selection du type de viewer
+        // Viewer type selection
         $type_viewer = '';
-        switch ($type_produit) {
+        switch ($product_type) {
             case 'calendarbasedproduct':
                 break;
             case 'filetree':
