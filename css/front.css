@@ -106,7 +106,7 @@
   position: absolute;
   z-index: 2;
   right: 0px;
-  background: #0d4882;
+  background: var(--theme-color);
   text-align: center;
   width: 40px;
   height: 40px;

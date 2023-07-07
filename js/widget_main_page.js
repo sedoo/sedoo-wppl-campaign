@@ -1,4 +1,9 @@
 /**
+ * Handle actions on the campaign manager admin page
+ * to update the campaign parameters
+ */
+
+/**
  * Campaign admin step 2
  * Save campaign id, name and settings once they are set (pages to create, etc.)
  *
@@ -73,7 +78,11 @@ jQuery("#wp-save-campaign").click(function () {
   sedoo_campaign_updateOptionMeta("swc_first_setup_done", true, true);
 });
 
-// checker pour supprimer les produits plus dans le flux
+/**
+ * Delete missing products
+ * 
+ * @param {array} productsIdArray 
+ */
 function sedoo_campaign_check_for_deleted_product(productsIdArray) {
   jQuery.ajax({
     url: ajaxurl,
@@ -82,11 +91,15 @@ function sedoo_campaign_check_for_deleted_product(productsIdArray) {
       action: "sedoo_campaign_check_and_delete_missing_products_in_the_flux",
       productsIdArray: productsIdArray
     },
-    success: function (result) {}
+    success: function () {}
   });
 }
 
-// créer un produit, ou le mettre à jour si il existe déjà
+/**
+ * Create or update a product
+ * 
+ * @param {string} product 
+ */
 function sedoo_campaign_createOrUpdateCampaignProduct(product) {
   jQuery.ajax({
     url: ajaxurl,
@@ -95,11 +108,17 @@ function sedoo_campaign_createOrUpdateCampaignProduct(product) {
       action: "sedoo_campaign_create_or_update_product",
       product: product
     },
-    success: function (result) {}
+    success: function () {}
   });
 }
 
-// update une meta de la page "PARAMETRES DE CAMPAGNE"
+/**
+ * Update campaign option
+ * 
+ * @param {string} metakey 
+ * @param {mixed} metavalue 
+ * @param {boolean} finalSave 
+ */
 function sedoo_campaign_updateOptionMeta(
   metakey,
   metavalue,
@@ -113,7 +132,7 @@ function sedoo_campaign_updateOptionMeta(
       metakey: metakey,
       metavalue: metavalue
     },
-    success: function (result) {
+    success: function () {
       const attr = jQuery("sedoocampaigns-admin").attr("first-setup-done");
       // do not reload is first setup is not done
       if ((typeof attr !== "undefined" && attr !== false) || finalSave) {
