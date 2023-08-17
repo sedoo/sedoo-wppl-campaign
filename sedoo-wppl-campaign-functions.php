@@ -101,7 +101,7 @@ function sedoo_campaign_archive_product_load_template($archive_template)
 add_action('wp_enqueue_scripts', 'sedoo_campaign_single_product_load_css');
 function sedoo_campaign_single_product_load_css()
 {
-    if ('sedoo_camp_products' === get_post_type()) {
+    if ('sedoo_camp_products' === get_post_type() || is_post_type_archive('sedoo_camp_products')) {
         wp_register_style('roboto-font', "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
         wp_enqueue_style('roboto-font');
         wp_register_style('mdi', "https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css");
@@ -121,13 +121,13 @@ function sedoo_campaign_single_product_load_css()
 // CREATE THE PRODUCT MENU
 function sedoo_campaign_init_product_menu()
 {
-    if (get_option('swc_products_menu_id')) {  // if products menu exists, do nothing
+    if ($productMenuId = get_option('swc_products_menu_id')) {  // if products menu exists, do nothing
     } else { // else, create the products menu
         $productMenuId = wp_create_nav_menu('sedoo-campaign-product-main-menu');
         update_option('swc_products_menu_id', $productMenuId);
     }
 }
-add_action('init', 'sedoo_campaign_init_product_menu', 0);
+add_action('admin_init', 'sedoo_campaign_init_product_menu', 0);
 // END CREATE THE PRODUCT MENU
 ///////
 

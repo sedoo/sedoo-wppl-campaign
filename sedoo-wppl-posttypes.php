@@ -63,7 +63,8 @@ function sedoo_campaign_register_product_post_type()
 }
 
 add_action('init', function () {
-	$settings = get_option('swc_settings');
+	$settings = get_option('swc_settings', false);
+	if (!$settings) return;
 	$products_archive_menu_item_id = get_option('swc_products_archive_menu_item', 0);
 	if ($settings->products === "true") {
 		sedoo_campaign_register_product_post_type();
